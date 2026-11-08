@@ -1286,8 +1286,7 @@ function savePortalSettingsToSheet(newSettings, currentAdminPin) {
       </p>
       <div class="mt-4 p-3.5 rounded-2xl bg-white/5 border border-white/10 text-xs text-white/80 space-y-1.5 text-left">
         <div class="flex justify-between"><span>Versi Antarmuka:</span><span class="font-semibold text-amber-300">iPadOS 18 Treasury Edition</span></div>
-        <div class="flex justify-between"><span>Jumlah Inovasi Aktif:</span><span id="aboutAppCount" class="font-semibold text-sky-300">12 Aplikasi</span></div>
-        <div class="flex justify-between"><span>Situs Referensi:</span><a href="https://situsmini.vercel.app/kppnluwuk" target="_blank" class="underline text-sky-300">situsmini.vercel.app/kppnluwuk</a></div>
+        <div class="flex justify-between"><span>Jumlah Inovasi Aktif:</span><span id="aboutAppCount" class="font-semibold text-sky-300">12 Aplikasi</span></div>  
       </div>
       <button onclick="closeAboutModal()" class="mt-5 w-full py-2.5 rounded-2xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs">
         Tutup
@@ -1641,7 +1640,7 @@ function savePortalSettingsToSheet(newSettings, currentAdminPin) {
                   linkEl.classList.remove('hidden');
                 }
               }
-              document.getElementById('dbSyncText').textContent = 'Tersinkron Google Sheet';
+              document.getElementById('dbSyncText').textContent = 'Tersinkron ke database';
               renderCategoryFilters();
               renderAppsGrid();
             }
