@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Portal KPPN Luwuk — iPadOS Home Screen</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            djpb: {
+              blue: '#00558c',
+              dark: '#002b49',
+              gold: '#f5c542',
+              accent: '#0ea5e9'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       CUSTOM CSS FOR AUTHENTIC iPadOS / iOS VISUALS & ANIMATIONS
+       ========================================================================== */
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.16);
+      --glass-border: rgba(255, 255, 255, 0.28);
+      --glass-dark: rgba(15, 23, 42, 0.55);
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    input, textarea, pre, code {
+      user-select: text;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Dynamic Wallpaper Themes */
+    .wp-djpb-aurora {
+      background:
+        radial-gradient(circle at 18% 20%, rgba(14, 165, 233, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(245, 197, 66, 0.38) 0%, transparent 40%),
+        radial-gradient(circle at 75% 80%, rgba(37, 99, 235, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 20% 85%, rgba(6, 182, 212, 0.4) 0%, transparent 45%),
+        linear-gradient(135deg, #021B35 0%, #00467F 48%, #04284A 100%);
+    }
+
+    .wp-luwuk-sunset {
+      background:
+        radial-gradient(circle at 25% 25%, rgba(251, 146, 60, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(236, 72, 153, 0.45) 0%, transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(59, 130, 246, 0.5) 0%, transparent 55%),
+        linear-gradient(160deg, #1e1b4b 0%, #311042 45%, #0f172a 100%);
+    }
+
+    .wp-ipados-pro {
+      background:
+        radial-gradient(circle at 15% 30%, rgba(56, 189, 248, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(99, 102, 241, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.25) 0%, transparent 40%),
+        linear-gradient(145deg, #030712 0%, #0f172a 50%, #1e1b4b 100%);
+    }
+
+    .wp-emerald-sulawesi {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.45) 0%, transparent 45%),
+        radial-gradient(circle at 80% 25%, rgba(250, 204, 21, 0.32) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(6, 182, 212, 0.45) 0%, transparent 50%),
+        linear-gradient(135deg, #022c22 0%, #064e3b 50%, #0f172a 100%);
+    }
+
+    .wp-kemenkeu-royal {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(234, 179, 8, 0.48) 0%, transparent 45%),
+        radial-gradient(circle at 20% 75%, rgba(2, 132, 199, 0.5) 0%, transparent 50%),
+        linear-gradient(135deg, #001a33 0%, #003366 55%, #001529 100%);
+    }
+
+    /* Glassmorphism Utilities */
+    .ios-glass {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+
+    .ios-glass-dark {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .ios-dock {
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Authentic iOS Squircle App Icon */
+    .ios-squircle {
+      border-radius: 24%;
+      position: relative;
+      box-shadow:
+        0 10px 20px -5px rgba(0, 0, 0, 0.38),
+        0 2px 6px -1px rgba(0, 0, 0, 0.2),
+        inset 0 1.5px 2px rgba(255, 255, 255, 0.45),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.25);
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+    }
+
+    .ios-squircle::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.03) 45%, rgba(0,0,0,0.08) 100%);
+      pointer-events: none;
+    }
+
+    .app-item:hover .ios-squircle {
+      transform: scale(1.07) translateY(-3px);
+      box-shadow:
+        0 16px 28px -6px rgba(0, 0, 0, 0.48),
+        inset 0 1.5px 3px rgba(255, 255, 255, 0.55);
+    }
+
+    .app-item:active .ios-squircle {
+      transform: scale(0.92);
+      filter: brightness(0.88);
+    }
+
+    /* iOS Jiggle Mode Animation */
+    @keyframes iosJiggle {
+      0% { transform: rotate(-1.8deg) translateY(0px); }
+      25% { transform: rotate(0deg) translateY(-1px); }
+      50% { transform: rotate(1.8deg) translateY(0px); }
+      75% { transform: rotate(0deg) translateY(1px); }
+      100% { transform: rotate(-1.8deg) translateY(0px); }
+    }
+
+    .jiggle-active .app-item:nth-child(odd) .ios-squircle {
+      animation: iosJiggle 0.28s infinite ease-in-out;
+    }
+    .jiggle-active .app-item:nth-child(even) .ios-squircle {
+      animation: iosJiggle 0.31s infinite ease-in-out reverse;
+    }
+
+    /* Spring Modal Animation */
+    @keyframes modalSpring {
+      0% { opacity: 0; transform: scale(0.82) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .animate-spring {
+      animation: modalSpring 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body id="appBody" class="wp-djpb-aurora text-white min-h-screen flex flex-col justify-between relative selection:bg-sky-400 selection:text-slate-900">
+
+  <!-- Ambient Floating Glows -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-sky-400/15 blur-3xl"></div>
+    <div class="absolute top-1/3 -right-24 w-96 h-96 rounded-full bg-amber-300/10 blur-3xl"></div>
+    <div class="absolute -bottom-28 left-1/3 w-96 h-96 rounded-full bg-blue-500/15 blur-3xl"></div>
+  </div>
+
+  <!-- ========================================================================
+       1. iPadOS / iOS TOP STATUS BAR
+       ======================================================================== -->
+  <header class="sticky top-0 z-30 w-full px-4 sm:px-8 py-2 flex items-center justify-between text-xs sm:text-sm font-medium tracking-tight backdrop-blur-md bg-slate-950/20 border-b border-white/10">
+    <!-- Left: Time & Date (WITA) -->
+    <div class="flex items-center gap-2.5">
+      <span id="statusBarTime" class="font-semibold text-white">09:12 WITA</span>
+      <span class="hidden sm:inline text-white/50">•</span>
+      <span id="statusBarDate" class="hidden sm:inline text-white/80">Min, 8 Nov</span>
+    </div>
+
+    <!-- Center: Dynamic Island / KPPN Luwuk Status Pill -->
+    <button onclick="openAboutModal()" class="px-3.5 py-1 rounded-full bg-black/55 hover:bg-black/75 border border-white/15 flex items-center gap-2 transition-all shadow-lg group" title="Informasi Portal KPPN Luwuk">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="text-[11px] sm:text-xs font-semibold text-white/95 tracking-wide">DJPb • KPPN Luwuk (088)</span>
+      <i class="fa-solid fa-circle-check text-sky-400 text-[11px]"></i>
+    </button>
+
+    <!-- Right: System Controls & Status Icons -->
+    <div class="flex items-center gap-2.5 sm:gap-3">
+      <!-- Admin Only: Edit Layar Button -->
+      <button onclick="toggleEditMode()" id="topEditBtn" class="admin-only hidden px-2.5 py-0.5 rounded-full bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/40 text-amber-200 text-[11px] font-semibold transition items-center gap-1.5" title="Mode Susun & Edit Aplikasi (Khusus Admin)">
+        <i class="fa-solid fa-pen-ruler text-[10px]"></i>
+        <span id="topEditBtnText" class="hidden md:inline">Edit Layar</span>
+      </button>
+
+      <!-- Admin Lock / Unlock Button -->
+      <button onclick="handleAdminButton()" id="topAdminBtn" class="px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[11px] font-medium transition flex items-center gap-1.5" title="Login / Status Admin KPPN">
+        <i id="topAdminIcon" class="fa-solid fa-lock text-[10px] text-white/75"></i>
+        <span id="topAdminText" class="hidden sm:inline text-white/85">Mode Publik</span>
+      </button>
+
+      <button onclick="toggleControlCenter()" class="p-1.5 rounded-full hover:bg-white/15 transition flex items-center gap-2" title="Pusat Kontrol & Tema">
+        <i class="fa-solid fa-wifi text-xs text-white/90"></i>
+        <i class="fa-solid fa-sliders text-xs text-amber-300"></i>
+        <div class="flex items-center gap-1">
+          <span class="hidden sm:inline text-[11px] text-white/85">100%</span>
+          <i class="fa-solid fa-battery-full text-sm text-emerald-400"></i>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. MAIN iPadOS HOME SCREEN CONTENT (WIDGETS + APP ICON GRID)
+       ======================================================================== -->
+  <main class="relative z-10 flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-2.5 sm:pt-3.5 pb-28 sm:pb-32 flex flex-col gap-3 sm:gap-4">
+
+    <!-- TOP SECTION: iPadOS Interactive Widgets Row -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-stretch">
+
+      <!-- Widget 1: Official KPPN Luwuk Identity & Header Card (7 cols on desktop) -->
+      <div class="lg:col-span-7 ios-glass rounded-3xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center sm:items-start gap-3.5 sm:gap-4 relative overflow-hidden">
+        <!-- Decorative Treasury Background Watermark -->
+        <div class="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
+          <i class="fa-solid fa-landmark-dome text-8xl text-white"></i>
+        </div>
+
+        <!-- DJPb Logo Emblem (Matching Screenshot Identity) -->
+        <div class="relative shrink-0">
+          <div id="portalLogoContainer" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white shadow-xl border-4 border-sky-400/60 flex flex-col items-center justify-center p-1.5 relative overflow-hidden group cursor-pointer" onclick="openAboutModal()">
+            <!-- Custom Uploaded Logo Image (Hidden by default if no custom logo) -->
+            <img id="customPortalLogoImg" src="" alt="Logo Portal KPPN Luwuk" class="hidden w-full h-full object-contain rounded-full" />
+            <!-- Default Stylized DJPb Treasury Emblem SVG -->
+            <div id="defaultPortalLogoSvg" class="flex flex-col items-center justify-center w-full h-full">
+              <svg viewBox="0 0 100 100" class="w-10 h-10 sm:w-12 sm:h-12">
+                <defs>
+                  <linearGradient id="djpbBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#0284c7" />
+                    <stop offset="100%" stop-color="#00467f" />
+                  </linearGradient>
+                  <linearGradient id="djpbGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f59e0b" />
+                    <stop offset="100%" stop-color="#eab308" />
+                  </linearGradient>
+                </defs>
+                <!-- Swirl Rings -->
+                <path d="M52 10 C42 28, 35 48, 52 72 C62 52, 62 30, 52 10 Z" fill="url(#djpbBlue)" />
+                <path d="M22 48 C40 38, 65 38, 82 48 C65 56, 38 56, 22 48 Z" fill="url(#djpbGold)" />
+                <ellipse cx="50" cy="60" rx="30" ry="9" fill="none" stroke="url(#djpbBlue)" stroke-width="5.5" />
+              </svg>
+              <span class="text-[9px] font-extrabold tracking-tight text-slate-900 leading-none mt-0.5">DJPb</span>
+              <span class="text-[6px] font-semibold text-slate-500 tracking-tight leading-none">Indonesian Treasury</span>
+            </div>
+          </div>
+          <!-- Verified Badge -->
+          <div class="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full bg-blue-500 border-2 border-slate-900 flex items-center justify-center shadow-md" title="Portal Resmi Terverifikasi">
+            <i class="fa-solid fa-check text-white text-[10px]"></i>
+          </div>
+        </div>
+
+        <!-- Portal Title, Subtitle & Quick Spotlight Bar -->
+        <div class="flex-1 text-center sm:text-left z-10 w-full">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 text-[10px] font-semibold mb-1">
+            <i class="fa-solid fa-sparkles text-[9px]"></i>
+            <span>Inovasi Digital Perbendaharaan</span>
+          </div>
+
+          <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white flex items-center justify-center sm:justify-start gap-2">
+            <span id="portalTitleText">Portal KPPN Luwuk</span>
+            <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-500 text-white text-[9px] shadow">
+              <i class="fa-solid fa-check"></i>
+            </span>
+          </h1>
+
+          <p id="portalSubtitleText" class="text-[11px] sm:text-xs text-white/80 font-normal mt-0.5 leading-snug">
+            Kumpulan Inovasi Layanan Perbendaharaan KPPN Luwuk
+          </p>
+
+          <!-- Spotlight Search Bar inside Widget -->
+          <div class="mt-2 relative flex items-center">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-white/60 text-xs pointer-events-none"></i>
+            <input
+              id="searchInput"
+              type="text"
+              oninput="handleSearch(this.value)"
+              placeholder="Cari aplikasi layanan (mis. Mokokawa, SAKTI, UP, VAR)..."
+              class="w-full pl-9 pr-14 py-1.5 rounded-2xl bg-black/25 hover:bg-black/35 focus:bg-black/45 border border-white/20 focus:border-sky-400 text-xs text-white placeholder-white/55 outline-none transition"
+            />
+            <button
+              id="clearSearchBtn"
+              onclick="clearSearch()"
+              class="hidden absolute right-2.5 px-2 py-0.5 rounded-lg bg-white/15 hover:bg-white/25 text-[10px] text-white/90"
+            >
+              Reset
+            </button>
+            <span id="shortcutHint" class="
+              hidden sm:inline-block absolute right-3 px-1.5 py-0.5 rounded bg-white/10 border border-white/15 text-[10px] text-white/60 pointer-events-none
+            ">⌘K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Widget 2: iPadOS Smart Stack — Category Filter & Live Service Info (5 cols on desktop) -->
+      <div class="lg:col-span-5 ios-glass rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between gap-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-xl bg-amber-400/20 border border-amber-300/30 flex items-center justify-center text-amber-300">
+              <i class="fa-solid fa-layer-group text-xs"></i>
+            </div>
+            <div>
+              <h2 class="text-xs font-bold uppercase tracking-wider text-white/90">Filter Kategori Layanan</h2>
+              <p class="text-[11px] text-white/60" id="activeCountLabel">Menampilkan 12 aplikasi inovasi</p>
+            </div>
+          </div>
+
+          <!-- Direct Launch Toggle Pill -->
+          <button
+            onclick="toggleDirectOpen()"
+            id="directLaunchPill"
+            class="px-2.5 py-1 rounded-xl bg-emerald-500/25 border border-emerald-400/40 text-emerald-200 text-[11px] font-medium flex items-center gap-1.5 transition hover:bg-emerald-500/35"
+            title="Ubah mode klik ikon: Buka Langsung vs Kartu Info"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            <span id="directLaunchText">Mode: Kartu Info</span>
+          </button>
+        </div>
+
+        <!-- Category Filter Pills (iOS Widget Buttons) -->
+        <div id="categoryFilterBar" class="flex flex-wrap gap-1.5">
+          <!-- Rendered dynamically via JS -->
+        </div>
+
+        <!-- Bottom Mini Status Bar inside Widget -->
+        <div class="pt-1.5 border-t border-white/15 flex items-center justify-between text-[11px] text-white/75">
+          <div class="flex items-center gap-1.5">
+            <i class="fa-solid fa-location-dot text-sky-300"></i>
+            <span>Luwuk, Kab. Banggai • Sulteng</span>
+          </div>
+          <!-- Public status vs Admin Spreadsheet Quick Button -->
+          <div class="flex items-center gap-2">
+            <span id="dbSyncBadge" class="inline-flex items-center gap-1 text-[10px] text-emerald-300 font-medium">
+              <i class="fa-solid fa-table-list"></i>
+              <span id="dbSyncText">Database Spreadsheet</span>
+            </span>
+            <button onclick="openGasModal()" class="admin-only preview-only hidden text-amber-300 hover:text-amber-200 font-semibold items-center gap-1 underline decoration-amber-400/50">
+              <i class="fa-brands fa-google-drive"></i>
+              <span>Setup Sheet & GAS</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- EDIT MODE BANNER (Hidden by default, shown when Jiggle Mode is active for Admin) -->
+    <div id="jiggleBanner" class="hidden ios-glass-dark rounded-2xl px-4 py-2.5 border border-amber-400/40 flex flex-wrap items-center justify-between gap-3 animate-spring">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div>
+          <h3 class="text-xs sm:text-sm font-bold text-white">Mode Admin — Edit Layar & Database Spreadsheet Aktif</h3>
+          <p class="text-[11px] text-white/70">Klik ikon untuk mengubah data di Sheet <code>Data_Aplikasi</code>, atau kelola Sheet <code>Pengaturan</code>.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="openAppEditor(null)" class="px-3 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow">
+          <i class="fa-solid fa-plus"></i>
+          <span>Inovasi Baru</span>
+        </button>
+        <button onclick="openSheetSettingsModal()" class="px-3 py-1.5 rounded-xl bg-emerald-500/25 hover:bg-emerald-500/35 border border-emerald-400/40 text-emerald-200 font-semibold text-xs flex items-center gap-1.5">
+          <i class="fa-solid fa-table"></i>
+          <span>Kategori & Sheet</span>
+        </button>
+        <button onclick="resetDefaultApps()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-medium">
+          Reset Default
+        </button>
+        <button onclick="toggleEditMode()" class="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow">
+          Selesai
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         3. iPadOS / iOS SQUIRCLE APP ICONS GRID
+         ====================================================================== -->
+    <section class="flex-1 flex flex-col justify-start mt-1">
+      <div
+        id="appsGrid"
+        class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-y-4 gap-x-3 sm:gap-y-5 sm:gap-x-5 py-1 place-items-center"
+      >
+        <!-- App Icons injected dynamically by JavaScript -->
+      </div>
+
+      <!-- Empty Search State -->
+      <div id="emptyState" class="hidden ios-glass rounded-3xl p-8 text-center max-w-md mx-auto my-4">
+        <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-3 text-2xl text-sky-300">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <h3 class="text-base font-bold text-white">Aplikasi Tidak Ditemukan</h3>
+        <p class="text-xs text-white/70 mt-1">Tidak ada inovasi layanan KPPN Luwuk yang cocok dengan kata kunci pencarian Anda.</p>
+        <button onclick="clearSearch()" class="mt-4 px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs transition">
+          Tampilkan Semua Aplikasi
+        </button>
+      </div>
+    </section>
+
+    <!-- iOS Page Indicator Dots (Rendered dynamically from categories) -->
+    <div id="pageDotsContainer" class="flex items-center justify-center gap-2 pt-1 pb-2">
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       4. FLOATING GLASSMORPHIC iPadOS / iOS BOTTOM DOCK
+       ======================================================================== -->
+  <nav aria-label="iPadOS Dock" class="fixed bottom-2 sm:bottom-3 inset-x-0 z-30 flex justify-center px-3 pointer-events-none">
+    <div class="ios-dock pointer-events-auto rounded-[24px] sm:rounded-[28px] px-3 sm:px-4 py-1.5 sm:py-2 flex items-center gap-2 sm:gap-3.5 max-w-full overflow-x-auto">
+
+      <!-- Dock Item 1: Beranda (Show All) -->
+      <button onclick="clearSearch(); playTapSound();" class="group flex flex-col items-center gap-0.5 shrink-0" title="Beranda Semua Aplikasi">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 ios-squircle bg-gradient-to-br from-sky-400 to-blue-700 flex items-center justify-center text-white text-base sm:text-lg">
+          <i class="fa-solid fa-table-cells-large"></i>
+        </div>
+        <span class="text-[9px] font-medium text-white/90 hidden sm:block">Beranda</span>
+      </button>
+
+      <!-- Dock Item 2: Mokokawa 2.0 Quick Access -->
+      <button onclick="handleAppClick('mokokawa-satker')" class="group flex flex-col items-center gap-0.5 shrink-0" title="Mokokawa 2.0 (for Satker)">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 ios-squircle bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 flex items-center justify-center text-white text-base sm:text-lg relative">
+          <i class="fa-solid fa-rocket"></i>
+          <span class="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-red-600 border border-white text-[7px] font-extrabold text-white shadow">2.0</span>
+        </div>
+        <span class="text-[9px] font-medium text-white/90 hidden sm:block">Mokokawa</span>
+      </button>
+
+      <!-- Dock Item 3: Direktori / Tampilan Tabel (List View seperti App Library) -->
+      <button onclick="openAppLibraryModal()" class="group flex flex-col items-center gap-0.5 shrink-0" title="App Library / Daftar Lengkap">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 ios-squircle bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-white text-base sm:text-lg">
+          <i class="fa-solid fa-folder-tree"></i>
+        </div>
+        <span class="text-[9px] font-medium text-white/90 hidden sm:block">App Library</span>
+      </button>
+
+      <!-- Dock Divider -->
+      <div class="w-px h-8 sm:h-9 bg-white/25 mx-0.5 shrink-0"></div>
+
+      <!-- Dock Item 4 (ADMIN ONLY): Tambah / Kelola Aplikasi -->
+      <button onclick="openAppEditor(null)" class="admin-only hidden group flex-col items-center gap-0.5 shrink-0" title="Tambah / Kelola Inovasi (Admin)">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 ios-squircle bg-gradient-to-br from-emerald-400 to-teal-700 flex items-center justify-center text-white text-base sm:text-lg">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <span class="text-[9px] font-medium text-amber-300 hidden sm:block">Tambah App</span>
+      </button>
+
+      <!-- Dock Item 5 (PUBLIC): Pengaturan Dasar (Tema & Suara) -->
+      <button onclick="toggleControlCenter()" class="group flex flex-col items-center gap-0.5 shrink-0" title="Pengaturan Tema & Suara">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 ios-squircle bg-gradient-to-br from-slate-500 via-slate-700 to-slate-900 flex items-center justify-center text-white text-base sm:text-lg">
+          <i class="fa-solid fa-gear"></i>
+        </div>
+        <span class="text-[9px] font-medium text-white/90 hidden sm:block">Pengaturan</span>
+      </button>
+
+      <!-- Dock Item 6 (ADMIN ONLY): Pengaturan Spreadsheet -->
+      <button onclick="openSheetSettingsModal()" class="admin-only hidden group flex-col items-center gap-0.5 shrink-0" title="Database Pengaturan & Kategori Spreadsheet (Admin)">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 ios-squircle bg-gradient-to-br from-green-500 via-emerald-600 to-teal-900 flex items-center justify-center text-white text-base sm:text-lg relative">
+          <i class="fa-solid fa-file-excel"></i>
+          <span class="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-white text-emerald-900 font-extrabold text-[7px] shadow">DB</span>
+        </div>
+        <span class="text-[9px] font-medium text-emerald-300 hidden sm:block">Sheet DB</span>
+      </button>
+
+      <!-- Dock Item 7 (ADMIN ONLY & PREVIEW ONLY): Kode Google Apps Script (Code.gs) -->
+      <button onclick="openGasModal()" class="admin-only preview-only hidden group flex-col items-center gap-0.5 shrink-0" title="Kode Google Apps Script (Code.gs) & Panduan (Hanya Preview)">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 ios-squircle bg-gradient-to-br from-blue-600 via-indigo-700 to-slate-900 flex items-center justify-center text-amber-300 text-base sm:text-lg relative">
+          <i class="fa-solid fa-code"></i>
+          <span class="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-amber-400 text-slate-950 font-extrabold text-[7px] shadow">GAS</span>
+        </div>
+        <span class="text-[9px] font-medium text-amber-300 hidden sm:block">Kode GAS</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       5. MODAL 1: iOS APP LAUNCH SHEET / DETAIL CARD
+       ======================================================================== -->
+  <div id="appDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+    <div class="ios-glass-dark rounded-[32px] max-w-md w-full p-6 border border-white/25 animate-spring relative overflow-hidden">
+      <!-- Close Button -->
+      <button onclick="closeAppDetailModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- App Header Info -->
+      <div class="flex items-center gap-4">
+        <div id="detailIconBox" class="w-16 h-16 ios-squircle flex items-center justify-center text-white text-2xl shrink-0">
+          <i id="detailIcon" class="fa-solid fa-cube"></i>
+        </div>
+        <div>
+          <span id="detailCategory" class="px-2.5 py-0.5 rounded-full bg-sky-400/20 border border-sky-400/30 text-sky-300 text-[10px] font-semibold uppercase tracking-wider">Kategori</span>
+          <h3 id="detailTitle" class="text-lg sm:text-xl font-extrabold text-white mt-1">Nama Aplikasi</h3>
+          <p id="detailSubtitle" class="text-xs text-white/65">KPPN Luwuk • DJPb Kemenkeu</p>
+        </div>
+      </div>
+
+      <!-- Description Box -->
+      <div class="mt-4 p-3.5 rounded-2xl bg-white/5 border border-white/10">
+        <p id="detailDesc" class="text-xs sm:text-sm text-white/85 leading-relaxed">
+          Deskripsi layanan inovasi KPPN Luwuk.
+        </p>
+        <div class="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[11px] text-white/60">
+          <span>Tautan Tujuan:</span>
+          <span id="detailUrlText" class="text-sky-300 font-mono truncate max-w-[210px]">https://...</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-5 flex flex-col gap-2.5">
+        <a
+          id="detailOpenBtn"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          onclick="closeAppDetailModal()"
+          class="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition"
+        >
+          <span>Buka Aplikasi Sekarang</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </a>
+
+        <div id="detailActionGrid" class="grid grid-cols-1 gap-2">
+          <button onclick="copyCurrentAppLink()" class="py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-semibold text-white flex items-center justify-center gap-1.5 transition">
+            <i class="fa-regular fa-copy"></i>
+            <span>Salin Tautan Layanan</span>
+          </button>
+          <button id="detailEditBtn" onclick="editCurrentDetailApp()" class="admin-only hidden py-2.5 rounded-xl bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/30 text-xs font-semibold text-amber-300 items-center justify-center gap-1.5 transition">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <span>Ubah Link / Info di Spreadsheet (Admin)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       6. MODAL 2: ADD / EDIT APPLICATION MODAL (ADMIN ONLY — SYNCED TO SHEET)
+       ======================================================================== -->
+  <div id="appEditorModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/65 backdrop-blur-md overflow-y-auto">
+    <div class="ios-glass-dark rounded-[32px] max-w-lg w-full p-6 border border-white/25 animate-spring my-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-white/15">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-sky-500/20 border border-sky-400/30 flex items-center justify-center text-sky-300">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <div>
+            <h3 id="editorModalTitle" class="text-base font-bold text-white">Kelola Aplikasi Inovasi</h3>
+            <p class="text-[11px] text-white/60">Perubahan tersimpan otomatis di Portal / Google Apps Script</p>
+          </div>
+        </div>
+        <button onclick="closeAppEditor()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="appEditorForm" onsubmit="saveAppFromEditor(event)" class="mt-4 space-y-3.5 text-xs sm:text-sm">
+        <input type="hidden" id="editAppId" />
+
+        <div>
+          <label class="block text-xs font-semibold text-white/80 mb-1">Nama Aplikasi / Layanan *</label>
+          <input id="editAppName" type="text" required placeholder="Contoh: Mokokawa 2.0 (for Satker)" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/20 text-white focus:border-sky-400 outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-white/80 mb-1">URL / Link Tujuan *</label>
+          <input id="editAppUrl" type="url" required placeholder="https://..." class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/20 text-white font-mono text-xs focus:border-sky-400 outline-none" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">Kategori</label>
+            <select id="editAppCategory" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/20 text-white focus:border-sky-400 outline-none">
+              <!-- Diisi otomatis dari state categories -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">Badge Notifikasi (Opsional)</label>
+            <input id="editAppBadge" type="text" maxlength="8" placeholder="Mis: 2.0, NEW, HOT" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/20 text-white focus:border-sky-400 outline-none" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">Ikon FontAwesome (Ketik / Pilih)</label>
+            <div class="flex items-center gap-2">
+              <div id="editIconPreviewBox" class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-700 flex items-center justify-center text-white text-base shrink-0 shadow border border-white/20">
+                <i id="editIconPreview" class="fa-solid fa-rocket"></i>
+              </div>
+              <input
+                id="editAppIcon"
+                type="text"
+                required
+                oninput="updateEditorIconPreview()"
+                placeholder="Mis: fa-rocket"
+                class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/20 text-amber-300 font-mono text-xs focus:border-sky-400 outline-none"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">Warna Gradasi Squircle</label>
+            <select id="editAppGradient" onchange="updateEditorIconPreview()" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/20 text-white focus:border-sky-400 outline-none">
+              <option value="from-amber-400 via-orange-500 to-red-500">Oranye Emas (Mokokawa)</option>
+              <option value="from-sky-400 via-blue-600 to-indigo-700">Biru DJPb</option>
+              <option value="from-sky-400 via-blue-600 to-indigo-800">Biru Indigo KPPN</option>
+              <option value="from-purple-500 via-fuchsia-600 to-pink-500">Ungu Fuchsia (SaktiGen)</option>
+              <option value="from-emerald-400 via-teal-600 to-cyan-700">Hijau Emerald (Smart-UP)</option>
+              <option value="from-emerald-400 via-teal-600 to-cyan-800">Hijau Emerald Tua</option>
+              <option value="from-cyan-400 via-sky-600 to-blue-700">Biru Sian (Cek-VAR)</option>
+              <option value="from-indigo-500 via-blue-700 to-slate-900">Biru Navy (BAS Online)</option>
+              <option value="from-rose-400 via-pink-600 to-purple-700">Merah Muda (e-MONICA)</option>
+              <option value="from-rose-400 via-pink-600 to-purple-800">Merah Muda Ungu</option>
+              <option value="from-teal-400 via-emerald-600 to-green-700">Hijau Toska (SI-REVA)</option>
+              <option value="from-teal-400 via-emerald-600 to-green-800">Hijau Toska Tua</option>
+              <option value="from-yellow-400 via-amber-500 to-orange-600">Kuning Kemenkeu</option>
+              <option value="from-blue-400 via-indigo-500 to-violet-700">Biru Violet (KADOMPE)</option>
+              <option value="from-lime-400 via-emerald-500 to-teal-700">Hijau Lime (MBG)</option>
+              <option value="from-fuchsia-500 via-purple-600 to-indigo-700">Fuchsia Indigo (Microsite)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Visual Quick Icon Picker Grid -->
+        <div class="p-2.5 rounded-2xl bg-white/5 border border-white/10">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[11px] font-semibold text-white/75">Pilih Cepat Ikon FontAwesome:</span>
+            <span class="text-[10px] text-white/50">Atau ketik kode <code>fa-...</code> di atas</span>
+          </div>
+          <div id="iconQuickPicker" class="grid grid-cols-8 sm:grid-cols-10 gap-1.5 max-h-28 overflow-y-auto p-1">
+            <!-- Diisi otomatis oleh JavaScript -->
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-white/80 mb-1">Deskripsi Singkat Layanan</label>
+          <textarea id="editAppDesc" rows="2" placeholder="Penjelasan singkat fungsi aplikasi inovasi..." class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/20 text-white focus:border-sky-400 outline-none"></textarea>
+        </div>
+
+        <div class="pt-3 flex items-center justify-between gap-2">
+          <button type="button" id="deleteAppBtn" onclick="deleteCurrentApp()" class="hidden px-3.5 py-2.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/35 border border-rose-400/40 text-rose-300 font-semibold text-xs">
+            <i class="fa-solid fa-trash-can mr-1"></i> Hapus
+          </button>
+          <div class="flex items-center gap-2 ml-auto">
+            <button type="button" onclick="closeAppEditor()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs">
+              Batal
+            </button>
+            <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-400 to-blue-600 hover:from-sky-300 hover:to-blue-500 text-white font-bold text-xs shadow-lg">
+              <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Aplikasi
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       7. MODAL 3: iPadOS CONTROL CENTER & WALLPAPER PICKER
+       ======================================================================== -->
+  <div id="controlCenterModal" class="fixed inset-0 z-50 hidden items-start justify-end p-4 sm:p-6 bg-black/40 backdrop-blur-sm" onclick="if(event.target === this) toggleControlCenter()">
+    <div class="ios-glass-dark rounded-[32px] w-full max-w-sm p-5 border border-white/25 animate-spring mt-8">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-white/80">Pusat Kontrol iPadOS</span>
+        <button onclick="toggleControlCenter()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Quick Toggles Grid -->
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <button onclick="toggleDirectOpen()" class="p-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 flex items-center gap-3 text-left transition">
+          <div id="ccDirectIcon" class="w-9 h-9 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-white">Klik Ikon</div>
+            <div id="ccDirectStatus" class="text-[10px] text-white/70">Kartu Info</div>
+          </div>
+        </button>
+
+        <button onclick="toggleSoundFx()" class="p-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 flex items-center gap-3 text-left transition">
+          <div id="ccSoundIcon" class="w-9 h-9 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-volume-high"></i>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-white">Suara Ketuk</div>
+            <div id="ccSoundStatus" class="text-[10px] text-white/70">Aktif</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Wallpaper Selector -->
+      <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 mb-4">
+        <div class="text-xs font-bold text-white mb-2.5 flex items-center gap-1.5">
+          <i class="fa-solid fa-palette text-amber-300"></i>
+          <span>Tema Wallpaper iPadOS</span>
+        </div>
+        <div class="grid grid-cols-1 gap-2 text-xs">
+          <button onclick="setWallpaper('wp-djpb-aurora')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-[#021B35] via-[#00467F] to-[#0ea5e9] border border-white/25 text-white font-semibold flex items-center justify-between">
+            <span>1. DJPb Treasury Blue (Default)</span>
+            <i class="fa-solid fa-circle-check text-amber-300"></i>
+          </button>
+          <button onclick="setWallpaper('wp-kemenkeu-royal')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-[#001a33] via-[#003366] to-[#eab308] border border-white/20 text-white font-semibold flex items-center justify-between">
+            <span>2. Kemenkeu Royal Navy & Gold</span>
+          </button>
+          <button onclick="setWallpaper('wp-luwuk-sunset')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-[#1e1b4b] via-[#311042] to-[#fb923c] border border-white/20 text-white font-semibold flex items-center justify-between">
+            <span>3. Teluk Luwuk Sunset</span>
+          </button>
+          <button onclick="setWallpaper('wp-emerald-sulawesi')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-[#022c22] via-[#064e3b] to-[#10b981] border border-white/20 text-white font-semibold flex items-center justify-between">
+            <span>4. Emerald Banggai Sulawesi</span>
+          </button>
+          <button onclick="setWallpaper('wp-ipados-pro')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-[#030712] via-[#0f172a] to-[#38bdf8] border border-white/20 text-white font-semibold flex items-center justify-between">
+            <span>5. iPadOS Pro Dark Midnight</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Access Section inside Control Center -->
+      <div class="pt-3 border-t border-white/15 space-y-2">
+        <!-- Shown to Public Visitors (Not Logged In as Admin) -->
+        <div id="ccPublicBox" class="flex items-center justify-between p-2.5 rounded-2xl bg-white/5 border border-white/10">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-white/70 text-xs">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Akses Pengunjung</div>
+              <div class="text-[10px] text-white/60">Pengaturan lanjut dikunci</div>
+            </div>
+          </div>
+          <button onclick="toggleControlCenter(); openAdminLoginModal();" class="px-3 py-1.5 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/40 text-amber-300 font-bold text-xs transition">
+            <i class="fa-solid fa-key mr-1"></i> Login Admin
+          </button>
+        </div>
+
+        <!-- Shown ONLY when Admin is Authenticated -->
+        <div id="ccAdminActions" class="admin-only hidden flex-col gap-2">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[11px] font-bold text-amber-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-unlock-keyhole"></i> Panel Kontrol Admin KPPN
+            </span>
+            <button onclick="logoutAdmin()" class="text-[11px] text-rose-300 hover:underline font-semibold">
+              Keluar Admin
+            </button>
+          </div>
+
+          <!-- Menu Khusus Admin: Upload Custom Logo Portal di Pusat Kontrol iPadOS -->
+          <div class="p-2.5 rounded-2xl bg-white/5 border border-white/15 flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-semibold text-white/90 flex items-center gap-1.5">
+                <i class="fa-solid fa-image text-sky-300"></i> Custom Logo Portal
+              </span>
+              <button
+                type="button"
+                id="ccResetLogoBtn"
+                onclick="resetCustomLogo()"
+                class="hidden text-[10px] text-rose-300 hover:underline font-semibold"
+              >
+                Reset Default
+              </button>
+            </div>
+            <div class="flex items-center gap-2">
+              <label for="ccLogoUploadInput" class="flex-1 py-1.5 px-2.5 rounded-xl bg-sky-500/25 hover:bg-sky-500/35 border border-sky-400/40 text-sky-200 font-semibold text-[11px] text-center cursor-pointer transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-upload text-[10px]"></i>
+                <span>Upload Gambar Logo</span>
+              </label>
+              <input
+                id="ccLogoUploadInput"
+                type="file"
+                accept="image/*"
+                class="hidden"
+                onchange="handleLogoFileUpload(event)"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-1.5">
+            <button onclick="toggleControlCenter(); toggleEditMode();" class="py-2 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/30 text-amber-200 font-semibold text-[11px]">
+              <i class="fa-solid fa-pen-ruler block mb-0.5"></i> Edit Layar
+            </button>
+            <button onclick="toggleControlCenter(); openSheetSettingsModal();" class="py-2 rounded-xl bg-emerald-400/20 hover:bg-emerald-400/30 border border-emerald-300/30 text-emerald-200 font-semibold text-[11px]">
+              <i class="fa-solid fa-table block mb-0.5"></i> Kategori & DB
+            </button>
+            <button onclick="toggleControlCenter(); openGasModal();" class="preview-only col-span-2 py-2 rounded-xl bg-sky-400/20 hover:bg-sky-400/30 border border-sky-300/30 text-sky-200 font-semibold text-[11px]">
+              <i class="fa-solid fa-code mr-1"></i> Kode GAS (Hanya Preview)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       7B. MODAL BARU: LOGIN ADMIN (iPadOS PASSCODE / PIN SHEET)
+       ======================================================================== -->
+  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/65 backdrop-blur-md" onclick="if(event.target === this) closeAdminLoginModal()">
+    <div class="ios-glass-dark rounded-[32px] max-w-sm w-full p-6 border border-white/25 animate-spring text-center relative">
+      <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-600 mx-auto flex items-center justify-center text-slate-950 text-2xl shadow-lg mb-3">
+        <i class="fa-solid fa-user-lock"></i>
+      </div>
+      <h3 class="text-lg font-extrabold text-white">Autentikasi Admin KPPN</h3>
+      <p class="text-xs text-white/70 mt-1">
+        Masukkan PIN / Kata Sandi Admin untuk membuka fitur Edit Layar, Kelola Aplikasi, Pengaturan Spreadsheet, dan Kode GAS.
+      </p>
+
+      <form onsubmit="submitAdminLogin(event)" class="mt-4 space-y-3">
+        <div>
+          <input
+            id="adminPinInput"
+            type="password"
+            required
+            placeholder="Masukkan PIN Admin..."
+            class="w-full px-4 py-3 rounded-2xl bg-black/45 border border-white/25 focus:border-amber-400 text-center text-base font-bold tracking-widest text-white outline-none"
+          />
+          <p id="adminPinError" class="hidden text-[11px] text-rose-400 font-semibold mt-1.5">
+            PIN Admin tidak sesuai. Silakan coba lagi.
+          </p>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-lg transition">
+          <i class="fa-solid fa-unlock mr-1"></i> Buka Kunci Admin
+        </button>
+      </form>
+
+      <div class="mt-4 pt-3 border-t border-white/10 text-[11px] text-white/55">
+        PIN Default Awal: <code class="px-1.5 py-0.5 rounded bg-white/10 text-amber-300 font-mono">kppn088</code> (Dapat diubah di Sheet <code>Pengaturan</code>)
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       7C. MODAL BARU: DATABASE PENGATURAN SPREADSHEET (ADMIN ONLY)
+       ======================================================================== -->
+  <div id="sheetSettingsModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md overflow-y-auto" onclick="if(event.target === this) closeSheetSettingsModal()">
+    <div class="ios-glass-dark rounded-[32px] max-w-xl w-full p-6 border border-white/25 animate-spring my-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-white/15">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 text-lg">
+            <i class="fa-solid fa-table"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-extrabold text-white">Database Pengaturan & Kategori</h3>
+            <p class="text-xs text-white/65">Tersimpan langsung pada tab Sheet <code>Pengaturan</code> &amp; <code>Data_Aplikasi</code></p>
+          </div>
+        </div>
+        <button onclick="closeSheetSettingsModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Architecture Explanation Box -->
+      <div class="mt-4 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-400/30 text-xs text-white/90 space-y-1.5">
+        <div class="font-bold text-emerald-300 flex items-center justify-between">
+          <span><i class="fa-solid fa-database mr-1.5"></i>Lokasi Penyimpanan Database:</span>
+          <a id="openSpreadsheetLink" href="#" target="_blank" class="hidden underline text-amber-300 font-bold">
+            Buka File Google Sheet <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+        <p class="text-[11px] text-white/80 leading-relaxed">
+          Perubahan pada pengaturan portal maupun daftar <b>Kategori Layanan</b> di bawah ini direkam langsung ke dalam Sheet <b><code>Pengaturan</code></b> pada Google Spreadsheet.
+        </p>
+      </div>
+
+      <form onsubmit="saveGlobalSettingsForm(event)" class="mt-4 space-y-3.5 text-xs sm:text-sm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">Judul Portal (Sheet <code>Pengaturan</code>)</label>
+            <input id="setPortalTitle" type="text" required class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/20 text-white focus:border-emerald-400 outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">PIN / Password Admin Baru</label>
+            <input id="setAdminPin" type="text" required class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/20 text-amber-300 font-mono focus:border-emerald-400 outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-white/80 mb-1">Subjudul Portal</label>
+          <input id="setPortalSubtitle" type="text" required class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/20 text-white focus:border-emerald-400 outline-none" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">Wallpaper Default Pengunjung</label>
+            <select id="setDefaultWallpaper" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/20 text-white focus:border-emerald-400 outline-none">
+              <option value="wp-djpb-aurora">1. DJPb Treasury Blue</option>
+              <option value="wp-kemenkeu-royal">2. Kemenkeu Royal Navy & Gold</option>
+              <option value="wp-luwuk-sunset">3. Teluk Luwuk Sunset</option>
+              <option value="wp-emerald-sulawesi">4. Emerald Banggai Sulawesi</option>
+              <option value="wp-ipados-pro">5. iPadOS Pro Dark Midnight</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/80 mb-1">Mode Klik Default Pengunjung</label>
+            <select id="setDefaultDirectOpen" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/20 text-white focus:border-emerald-400 outline-none">
+              <option value="false">Kartu Info Detail (iOS Sheet)</option>
+              <option value="true">Buka Langsung URL di Tab Baru</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             MANAJEMEN KATEGORI LAYANAN (TERSIMPAN DI DATABASE SPREADSHEET)
+             ================================================================== -->
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/15 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Kelola Kategori Layanan (Tersimpan di Database)</span>
+              </h4>
+              <p class="text-[10px] text-white/60">Ubah nama kategori, ikon FontAwesome kategori, atau tambah kategori baru</p>
+            </div>
+            <button type="button" onclick="addCategoryRow()" class="px-2.5 py-1 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/40 text-amber-200 font-bold text-[11px] flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah Kategori
+            </button>
+          </div>
+
+          <div id="categoriesEditorList" class="space-y-2 max-h-44 overflow-y-auto pr-1">
+            <!-- Baris kategori dirender secara dinamis oleh JS -->
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-white/15 flex items-center justify-between gap-2">
+          <button type="button" onclick="closeSheetSettingsModal(); openGasModal();" class="preview-only px-3.5 py-2.5 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/30 text-sky-300 font-semibold text-xs">
+            <i class="fa-solid fa-code mr-1"></i> Lihat Kode GAS
+          </button>
+          <div class="flex items-center gap-2 ml-auto">
+            <button type="button" onclick="closeSheetSettingsModal()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs">
+              Batal
+            </button>
+            <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-600 hover:from-emerald-300 hover:to-teal-500 text-slate-950 font-extrabold text-xs shadow-lg">
+              <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Simpan ke Spreadsheet
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       8. MODAL 4: APP LIBRARY (LIST & TABLE DIRECTORY VIEW)
+       ======================================================================== -->
+  <div id="appLibraryModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/65 backdrop-blur-md">
+    <div class="ios-glass-dark rounded-[32px] max-w-3xl w-full max-h-[85vh] flex flex-col border border-white/25 animate-spring overflow-hidden">
+      <div class="p-5 border-b border-white/15 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white">
+            <i class="fa-solid fa-folder-tree"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-extrabold text-white">App Library — KPPN Luwuk</h3>
+            <p class="text-xs text-white/65">Daftar lengkap seluruh inovasi layanan beserta tautan cepat</p>
+          </div>
+        </div>
+        <button onclick="closeAppLibraryModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="appLibraryList" class="p-5 overflow-y-auto space-y-2.5 flex-1">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       9. MODAL 5: GOOGLE APPS SCRIPT (Code.gs) & DEPLOYMENT GUIDE
+       ======================================================================== -->
+  <div id="gasModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+    <div class="ios-glass-dark rounded-[32px] max-w-3xl w-full max-h-[88vh] flex flex-col border border-white/25 animate-spring overflow-hidden">
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-white/15 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-amber-400/20 border border-amber-300/40 flex items-center justify-center text-amber-300 text-lg">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-extrabold text-white">Integrasi Google Apps Script (`Code.gs`)</h3>
+            <p class="text-xs text-white/65">Mendukung Web App GAS langsung maupun Backend API untuk Vercel</p>
+          </div>
+        </div>
+        <button onclick="closeGasModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-white/85 leading-relaxed">
+        <div class="p-4 rounded-2xl bg-sky-500/15 border border-sky-400/30 space-y-2">
+          <div class="font-bold text-sky-300 flex items-center gap-2">
+            <i class="fa-solid fa-table-columns"></i>
+            <span>Arsitektur Hybrid: Frontend Vercel + Database Google Spreadsheet:</span>
+          </div>
+          <ol class="list-decimal list-inside space-y-1 text-xs text-white/90">
+            <li>Buat Google Spreadsheet di Google Drive Anda, lalu klik menu <b>Extensions (Ekstensi) &rarr; Apps Script</b>.</li>
+            <li>Tempelkan kode <code>Code.gs</code> di bawah ini, lalu klik <b>Deploy &rarr; New deployment &rarr; Web app</b> (pilih <i>Execute as: Me</i> &amp; <i>Who has access: Anyone</i>).</li>
+            <li>Salin <b>Web App URL (`https://script.google.com/macros/s/.../exec`)</b> ke variabel <code>GAS_WEB_APP_URL</code> di dalam file <code>index.html</code> sebelum di-deploy ke Vercel.</li>
+          </ol>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-amber-300 text-xs uppercase tracking-wider">File 1: Code.gs (Mendukung Vercel REST API + Google Spreadsheet)</span>
+          <button onclick="copyGasCode()" class="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow">
+            <i class="fa-regular fa-copy"></i>
+            <span id="copyGasBtnText">Salin Code.gs</span>
+          </button>
+        </div>
+
+        <pre id="gasCodeBlock" class="p-4 rounded-2xl bg-slate-950/90 border border-white/15 text-[11px] font-mono text-emerald-300 overflow-x-auto leading-relaxed">/**
+ * ============================================================================
+ * PORTAL INOVASI LAYANAN KPPN LUWUK — GOOGLE APPS SCRIPT + SPREADSHEET DB
+ * (MENDUKUNG PENUH FRONTEND VERCEL VIA REST API &amp; NATIVE GAS WEB APP)
+ * ============================================================================
+ */
+var SPREADSHEET_ID = ''; 
+
+function doGet(e) {
+  // Jika dipanggil dari Vercel menggunakan fetch('.../exec?action=bootstrap')
+  if (e &amp;&amp; e.parameter &amp;&amp; e.parameter.action === 'bootstrap') {
+    var data = getPortalBootstrapData();
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'success',
+      data: data
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Jika dibuka langsung sebagai halaman Web App Google Apps Script
+  return HtmlService.createTemplateFromFile('Index')
+    .evaluate()
+    .setTitle('Portal KPPN Luwuk — Inovasi Layanan Perbendaharaan')
+    .setFaviconUrl('https://www.kemenkeu.go.id/favicon.ico')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+/**
+ * Endpoint POST untuk melayani request dari Vercel (Verify PIN, Save Apps, Save Settings)
+ */
+function doPost(e) {
+  try {
+    var body = JSON.parse(e.postData.contents || '{}');
+    var action = body.action;
+    var result = {};
+
+    if (action === 'verifyPin') {
+      result = verifyAdminPinServer(body.pin);
+    } else if (action === 'saveApps') {
+      result = saveAppsDataToSheet(body.apps, body.adminPin);
+    } else if (action === 'saveSettings') {
+      result = savePortalSettingsToSheet(body.settings, body.adminPin);
+    } else {
+      throw new Error('Action tidak dikenali: ' + action);
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'success',
+      data: result
+    })).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: err.message || String(err)
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Mendapatkan atau membuat Spreadsheet Database secara otomatis
+ */
+function getOrInitSpreadsheet_() {
+  var ss = null;
+  var props = PropertiesService.getScriptProperties();
+  var targetId = SPREADSHEET_ID || props.getProperty('KPPN_SPREADSHEET_ID');
+
+  if (targetId) {
+    try { ss = SpreadsheetApp.openById(targetId); } catch (e) { ss = null; }
+  }
+  if (!ss) {
+    try { ss = SpreadsheetApp.getActiveSpreadsheet(); } catch (e) { ss = null; }
+  }
+  if (!ss) {
+    ss = SpreadsheetApp.create('Database Portal Inovasi KPPN Luwuk (088)');
+    props.setProperty('KPPN_SPREADSHEET_ID', ss.getId());
+  }
+
+  // Pastikan Sheet 1: "Data_Aplikasi" tersedia
+  var appSheet = ss.getSheetByName('Data_Aplikasi');
+  if (!appSheet) {
+    appSheet = ss.insertSheet('Data_Aplikasi');
+    appSheet.appendRow(['id', 'name', 'shortName', 'category', 'badge', 'icon', 'gradient', 'url', 'desc']);
+    appSheet.getRange('A1:I1').setFontWeight('bold').setBackground('#00467f').setFontColor('#ffffff');
+    appSheet.setFrozenRows(1);
+  }
+
+  // Pastikan Sheet 2: "Pengaturan" tersedia
+  var setSheet = ss.getSheetByName('Pengaturan');
+  if (!setSheet) {
+    setSheet = ss.insertSheet('Pengaturan');
+    setSheet.appendRow(['Kunci_Pengaturan', 'Nilai', 'Keterangan']);
+    setSheet.getRange('A1:C1').setFontWeight('bold').setBackground('#064e3b').setFontColor('#ffffff');
+    setSheet.setFrozenRows(1);
+    setSheet.appendRow(['portalTitle', 'Portal KPPN Luwuk', 'Judul utama pada widget header']);
+    setSheet.appendRow(['portalSubtitle', 'Kumpulan Inovasi Layanan Perbendaharaan KPPN Luwuk', 'Subjudul portal']);
+    setSheet.appendRow(['defaultWallpaper', 'wp-djpb-aurora', 'Tema wallpaper default pengunjung']);
+    setSheet.appendRow(['defaultDirectOpen', 'false', 'true = langsung buka tab baru, false = kartu info']);
+    setSheet.appendRow(['adminPin', 'kppn088', 'PIN / Password untuk membuka Mode Admin']);
+    setSheet.appendRow(['categoriesJson', '[{"id":"Layanan Satker","label":"Layanan Satker","icon":"fa-handshake-angle"},{"id":"Pelaksanaan & Akuntansi","label":"Anggaran & Akuntansi","icon":"fa-chart-pie"},{"id":"SAKTI & Tools","label":"SAKTI & Tools","icon":"fa-screwdriver-wrench"},{"id":"Internal & Survei","label":"Internal & Survei","icon":"fa-clipboard-list"}]', 'Daftar Kategori Layanan (JSON)']);
+    setSheet.appendRow(['customLogoUrl', '', 'Data URL / Link gambar custom logo portal']);
+  }
+
+  return ss;
+}
+
+/**
+ * Mengambil seluruh data (Daftar Aplikasi + Pengaturan) dari Google Spreadsheet
+ */
+function getPortalBootstrapData() {
+  var ss = getOrInitSpreadsheet_();
+  var appSheet = ss.getSheetByName('Data_Aplikasi');
+  var setSheet = ss.getSheetByName('Pengaturan');
+
+  var apps = [];
+  var appRows = appSheet.getDataRange().getValues();
+  for (var i = 1; i &lt; appRows.length; i++) {
+    var r = appRows[i];
+    if (r[0] &amp;&amp; r[1]) {
+      apps.push({
+        id: String(r[0]),
+        name: String(r[1]),
+        shortName: String(r[2] || r[1]),
+        category: String(r[3] || 'Layanan Satker'),
+        badge: String(r[4] || ''),
+        icon: String(r[5] || 'fa-rocket'),
+        gradient: String(r[6] || 'from-sky-400 via-blue-600 to-indigo-700'),
+        url: String(r[7] || '#'),
+        desc: String(r[8] || '')
+      });
+    }
+  }
+
+  var settings = {};
+  var setRows = setSheet.getDataRange().getValues();
+  for (var j = 1; j &lt; setRows.length; j++) {
+    var key = String(setRows[j][0]).trim();
+    var val = String(setRows[j][1]).trim();
+    if (key &amp;&amp; key !== 'adminPin') {
+      settings[key] = val;
+    }
+  }
+
+  return {
+    apps: apps.length &gt; 0 ? apps : null,
+    settings: settings,
+    spreadsheetUrl: ss.getUrl()
+  };
+}
+
+function verifyAdminPinServer(inputPin) {
+  var ss = getOrInitSpreadsheet_();
+  var setSheet = ss.getSheetByName('Pengaturan');
+  var rows = setSheet.getDataRange().getValues();
+  var validPin = 'kppn088';
+  for (var i = 1; i &lt; rows.length; i++) {
+    if (String(rows[i][0]).trim() === 'adminPin') {
+      validPin = String(rows[i][1]).trim();
+      break;
+    }
+  }
+  return { valid: String(inputPin).trim() === validPin };
+}
+
+function saveAppsDataToSheet(appsArray, adminPin) {
+  var auth = verifyAdminPinServer(adminPin);
+  if (!auth.valid) throw new Error('Akses ditolak: PIN Admin tidak valid.');
+
+  var ss = getOrInitSpreadsheet_();
+  var sheet = ss.getSheetByName('Data_Aplikasi');
+  sheet.clearContents();
+  var rows = [['id', 'name', 'shortName', 'category', 'badge', 'icon', 'gradient', 'url', 'desc']];
+
+  appsArray.forEach(function(app) {
+    rows.push([
+      app.id || '',
+      app.name || '',
+      app.shortName || app.name || '',
+      app.category || 'Layanan Satker',
+      app.badge || '',
+      app.icon || 'fa-rocket',
+      app.gradient || 'from-sky-400 via-blue-600 to-indigo-700',
+      app.url || '#',
+      app.desc || ''
+    ]);
+  });
+
+  sheet.getRange(1, 1, rows.length, 9).setValues(rows);
+  return { status: 'success', count: appsArray.length, spreadsheetUrl: ss.getUrl() };
+}
+
+function savePortalSettingsToSheet(newSettings, currentAdminPin) {
+  var auth = verifyAdminPinServer(currentAdminPin);
+  if (!auth.valid) throw new Error('Akses ditolak: PIN Admin tidak valid.');
+
+  var ss = getOrInitSpreadsheet_();
+  var setSheet = ss.getSheetByName('Pengaturan');
+  setSheet.clearContents();
+  var rows = [
+    ['Kunci_Pengaturan', 'Nilai', 'Keterangan'],
+    ['portalTitle', newSettings.portalTitle || 'Portal KPPN Luwuk', 'Judul utama pada widget header'],
+    ['portalSubtitle', newSettings.portalSubtitle || 'Kumpulan Inovasi Layanan Perbendaharaan KPPN Luwuk', 'Subjudul portal'],
+    ['defaultWallpaper', newSettings.defaultWallpaper || 'wp-djpb-aurora', 'Tema wallpaper default pengunjung'],
+    ['defaultDirectOpen', String(newSettings.defaultDirectOpen || 'false'), 'true = langsung buka tab baru, false = kartu info'],
+    ['adminPin', newSettings.adminPin || currentAdminPin || 'kppn088', 'PIN / Password untuk membuka Mode Admin'],
+    ['categoriesJson', newSettings.categoriesJson || '[]', 'Daftar Kategori Layanan (JSON)'],
+    ['customLogoUrl', newSettings.customLogoUrl || '', 'Data URL / Link gambar custom logo portal']
+  ];
+  setSheet.getRange(1, 1, rows.length, 3).setValues(rows);
+  return { status: 'success', spreadsheetUrl: ss.getUrl() };
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       10. MODAL 6: ABOUT PORTAL KPPN LUWUK
+       ======================================================================== -->
+  <div id="aboutModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/65 backdrop-blur-md" onclick="if(event.target === this) closeAboutModal()">
+    <div class="ios-glass-dark rounded-[32px] max-w-md w-full p-6 border border-white/25 animate-spring text-center">
+      <div class="w-16 h-16 rounded-full bg-white mx-auto flex items-center justify-center border-4 border-sky-400 shadow-lg mb-3 overflow-hidden p-1.5">
+        <img id="aboutCustomLogoImg" src="" alt="Logo Portal" class="hidden w-full h-full object-contain rounded-full" />
+        <i id="aboutDefaultLogoIcon" class="fa-solid fa-landmark-dome text-2xl text-sky-700"></i>
+      </div>
+      <h3 class="text-lg font-extrabold text-white flex items-center justify-center gap-1.5">
+        <span>Portal KPPN Luwuk</span>
+        <i class="fa-solid fa-circle-check text-blue-400 text-sm"></i>
+      </h3>
+      <p class="text-xs text-white/75 mt-1">
+        Kantor Pelayanan Perbendaharaan Negara Tipe A1 Luwuk (088)<br/>
+        Kanwil DJPb Provinsi Sulawesi Tengah
+      </p>
+      <div class="mt-4 p-3.5 rounded-2xl bg-white/5 border border-white/10 text-xs text-white/80 space-y-1.5 text-left">
+        <div class="flex justify-between"><span>Versi Antarmuka:</span><span class="font-semibold text-amber-300">iPadOS 18 Treasury Edition</span></div>
+        <div class="flex justify-between"><span>Jumlah Inovasi Aktif:</span><span id="aboutAppCount" class="font-semibold text-sky-300">12 Aplikasi</span></div>
+        <div class="flex justify-between"><span>Situs Referensi:</span><a href="https://situsmini.vercel.app/kppnluwuk" target="_blank" class="underline text-sky-300">situsmini.vercel.app/kppnluwuk</a></div>
+      </div>
+      <button onclick="closeAboutModal()" class="mt-5 w-full py-2.5 rounded-2xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs">
+        Tutup
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       11. iOS TOAST NOTIFICATION BANNER
+       ======================================================================== -->
+  <div id="iosToast" class="fixed top-14 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full ios-glass-dark border border-white/25 shadow-2xl flex items-center gap-2.5 text-xs font-semibold text-white">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="iosToastText">Berhasil disimpan</span>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT APPLICATION LOGIC
+       ======================================================================== -->
+  <script>
+    /**
+     * Daftar 12 Aplikasi Inovasi Layanan Perbendaharaan KPPN Luwuk
+     * Sesuai dengan daftar pada Portal KPPN Luwuk (https://situsmini.vercel.app/kppnluwuk)
+     */
+    const DEFAULT_APPS = [
+      {
+        id: 'mokokawa-satker',
+        name: 'Mokokawa 2.0 (for Satker)',
+        shortName: 'Mokokawa Satker',
+        category: 'Layanan Satker',
+        badge: '2.0',
+        icon: 'fa-rocket',
+        gradient: 'from-amber-400 via-orange-500 to-red-500',
+        url: 'https://situsmini.vercel.app/kppnluwuk#mokokawa-satker',
+        desc: 'Aplikasi Layanan Monitoring Konfirmasi & Kawal Layanan Mitra Kerja (Satker) KPPN Luwuk generasi 2.0.'
+      },
+      {
+        id: 'mokokawa-kppn',
+        name: 'Mokokawa 2.0 (for KPPN)',
+        shortName: 'Mokokawa KPPN',
+        category: 'Internal & Survei',
+        badge: 'INTERNAL',
+        icon: 'fa-building-shield',
+        gradient: 'from-sky-400 via-blue-600 to-indigo-800',
+        url: 'https://situsmini.vercel.app/kppnluwuk#mokokawa-kppn',
+        desc: 'Dashboard Internal Pegawai & Pejabat KPPN Luwuk untuk pemantauan tiket dan tindak lanjut layanan Mokokawa 2.0.'
+      },
+      {
+        id: 'saktigen',
+        name: 'SaktiGen',
+        shortName: 'SaktiGen',
+        category: 'SAKTI & Tools',
+        badge: 'AI/GEN',
+        icon: 'fa-wand-magic-sparkles',
+        gradient: 'from-purple-500 via-fuchsia-600 to-pink-500',
+        url: 'https://situsmini.vercel.app/kppnluwuk#saktigen',
+        desc: 'Inovasi Generator & Utilitas Bantu Otomatisasi Administrasi Pengguna Aplikasi SAKTI Satker.'
+      },
+      {
+        id: 'smart-up',
+        name: 'Smart-UP',
+        shortName: 'Smart-UP',
+        category: 'Pelaksanaan & Akuntansi',
+        badge: 'UP/TUP',
+        icon: 'fa-chart-line',
+        gradient: 'from-emerald-400 via-teal-600 to-cyan-800',
+        url: 'https://situsmini.vercel.app/kppnluwuk#smart-up',
+        desc: 'Sistem Monitoring & Analisis Revolving Uang Persediaan (UP) dan Tambahan Uang Persediaan (TUP) Satker.'
+      },
+      {
+        id: 'cek-var',
+        name: 'Cek-VAR',
+        shortName: 'Cek-VAR',
+        category: 'Pelaksanaan & Akuntansi',
+        badge: '',
+        icon: 'fa-magnifying-glass-dollar',
+        gradient: 'from-cyan-400 via-sky-600 to-blue-700',
+        url: 'https://situsmini.vercel.app/kppnluwuk#cek-var',
+        desc: 'Layanan Pengecekan Cepat, Validasi Data Anggaran, Rekening, dan Verifikasi Akuntansi Pelaporan.'
+      },
+      {
+        id: 'bas-online',
+        name: 'BAS Online',
+        shortName: 'BAS Online',
+        category: 'Pelaksanaan & Akuntansi',
+        badge: 'AKUN',
+        icon: 'fa-book-bookmark',
+        gradient: 'from-indigo-500 via-blue-700 to-slate-900',
+        url: 'https://situsmini.vercel.app/kppnluwuk#bas-online',
+        desc: 'Pencarian Bagan Akun Standar (BAS) Online interaktif untuk memastikan ketepatan penggunaan akun belanja & pendapatan.'
+      },
+      {
+        id: 'e-monica',
+        name: 'e-MONICA (Kuesioner CGA)',
+        shortName: 'e-MONICA',
+        category: 'Pelaksanaan & Akuntansi',
+        badge: 'CGA',
+        icon: 'fa-clipboard-check',
+        gradient: 'from-rose-400 via-pink-600 to-purple-800',
+        url: 'https://situsmini.vercel.app/kppnluwuk#e-monica',
+        desc: 'Electronic Monitoring Central Government Accounting — Kuesioner & Evaluasi Kualitas Laporan Keuangan.'
+      },
+      {
+        id: 'si-reva',
+        name: 'SI-REVA',
+        shortName: 'SI-REVA',
+        category: 'Pelaksanaan & Akuntansi',
+        badge: '',
+        icon: 'fa-scale-balanced',
+        gradient: 'from-teal-400 via-emerald-600 to-green-800',
+        url: 'https://situsmini.vercel.app/kppnluwuk#si-reva',
+        desc: 'Sistem Informasi Rekonsiliasi & Evaluasi Pelaksanaan Anggaran Satker lingkup KPPN Luwuk.'
+      },
+      {
+        id: 'link-sakti',
+        name: 'LINK-SAKTI',
+        shortName: 'LINK-SAKTI',
+        category: 'SAKTI & Tools',
+        badge: 'HUB',
+        icon: 'fa-link',
+        gradient: 'from-yellow-400 via-amber-500 to-orange-600',
+        url: 'https://situsmini.vercel.app/kppnluwuk#link-sakti',
+        desc: 'Sentra Tautan Penting, Petunjuk Teknis (Juknis), Formulir, dan Panduan Solusi Aplikasi SAKTI.'
+      },
+      {
+        id: 'kadompe',
+        name: 'KADOMPE',
+        shortName: 'KADOMPE',
+        category: 'Layanan Satker',
+        badge: '',
+        icon: 'fa-folder-open',
+        gradient: 'from-blue-400 via-indigo-500 to-violet-700',
+        url: 'https://situsmini.vercel.app/kppnluwuk#kadompe',
+        desc: 'Kamus Dokumen & Panduan Perbendaharaan Elektronik untuk kelengkapan berkas pengajuan Satker.'
+      },
+      {
+        id: 'kuesioner-mbg',
+        name: 'Kuesioner MBG Offline',
+        shortName: 'Kuesioner MBG',
+        category: 'Internal & Survei',
+        badge: 'SURVEI',
+        icon: 'fa-comments',
+        gradient: 'from-lime-400 via-emerald-500 to-teal-700',
+        url: 'https://situsmini.vercel.app/kppnluwuk#kuesioner-mbg',
+        desc: 'Formulir & Kuesioner Monitoring Evaluasi Pelaksanaan Program Makan Bergizi Gratis (MBG).'
+      },
+      {
+        id: 'microsite-gratis',
+        name: 'Microsite Gratis',
+        shortName: 'Microsite Gratis',
+        category: 'SAKTI & Tools',
+        badge: 'FREE',
+        icon: 'fa-globe',
+        gradient: 'from-fuchsia-500 via-purple-600 to-indigo-700',
+        url: 'https://situsmini.vercel.app/kppnluwuk#microsite-gratis',
+        desc: 'Layanan Pembuatan Microsite / Landing Page Tautan Instansi Gratis oleh KPPN Luwuk.'
+      }
+    ];
+
+    const DEFAULT_CATEGORIES = [
+      { id: 'Layanan Satker', label: 'Layanan Satker', icon: 'fa-handshake-angle' },
+      { id: 'Pelaksanaan & Akuntansi', label: 'Anggaran & Akuntansi', icon: 'fa-chart-pie' },
+      { id: 'SAKTI & Tools', label: 'SAKTI & Tools', icon: 'fa-screwdriver-wrench' },
+      { id: 'Internal & Survei', label: 'Internal & Survei', icon: 'fa-clipboard-list' }
+    ];
+
+    const AVAILABLE_FA_ICONS = [
+      'fa-rocket', 'fa-building-shield', 'fa-wand-magic-sparkles', 'fa-chart-line',
+      'fa-magnifying-glass-dollar', 'fa-book-bookmark', 'fa-clipboard-check', 'fa-scale-balanced',
+      'fa-link', 'fa-folder-open', 'fa-comments', 'fa-globe', 'fa-landmark-dome',
+      'fa-file-invoice-dollar', 'fa-coins', 'fa-money-bill-transfer', 'fa-vault',
+      'fa-stamp', 'fa-file-signature', 'fa-shield-halved', 'fa-headset', 'fa-bullhorn',
+      'fa-chart-pie', 'fa-calculator', 'fa-database', 'fa-cloud-arrow-up', 'fa-qrcode',
+      'fa-laptop-code', 'fa-network-wired', 'fa-award', 'fa-graduation-cap', 'fa-newspaper'
+    ];
+
+    // ========================================================================
+    // KONFIGURASI BACKEND HYBRID (VERCEL REST API / GOOGLE APPS SCRIPT NATIVE)
+    // ========================================================================
+    // Tempelkan URL Web App Google Apps Script Anda (berakhiran /exec) di bawah ini
+    // ketika menghosting aplikasi di Vercel agar tetap tersambung ke Google Spreadsheet:
+    const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxVwn5md0piYNwcaZlUn1ZxaKTqHjOOyFsukanMyPxWzBdh4b-z6orolrxqkmZsR0as/exec'; // Contoh: 'https://script.google.com/macros/s/AKfycb.../exec'
+
+    const isNativeGas = (typeof google !== 'undefined' && google.script && google.script.run);
+    const hasRemoteGasApi = Boolean(GAS_WEB_APP_URL && GAS_WEB_APP_URL.startsWith('https://script.google.com/'));
+    const isGasDeployed = isNativeGas || hasRemoteGasApi;
+
+    // Helper pemanggil Backend Spreadsheet (Otomatis memilih Native GAS atau Fetch REST API dari Vercel)
+    async function callSheetBackend(action, payload = {}) {
+      if (isNativeGas) {
+        return new Promise((resolve, reject) => {
+          const runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(reject);
+          if (action === 'bootstrap') runner.getPortalBootstrapData();
+          else if (action === 'verifyPin') runner.verifyAdminPinServer(payload.pin);
+          else if (action === 'saveApps') runner.saveAppsDataToSheet(payload.apps, payload.adminPin);
+          else if (action === 'saveSettings') runner.savePortalSettingsToSheet(payload.settings, payload.adminPin);
+        });
+      } else if (hasRemoteGasApi) {
+        if (action === 'bootstrap') {
+          const res = await fetch(`${GAS_WEB_APP_URL}?action=bootstrap`, { method: 'GET', redirect: 'follow' });
+          const json = await res.json();
+          if (json.status === 'error') throw new Error(json.message);
+          return json.data;
+        } else {
+          // Gunakan Content-Type text/plain agar terhindar dari blokir CORS Preflight (OPTIONS) pada Google Apps Script
+          const res = await fetch(GAS_WEB_APP_URL, {
+            method: 'POST',
+            redirect: 'follow',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action, ...payload })
+          });
+          const json = await res.json();
+          if (json.status === 'error') throw new Error(json.message);
+          return json.data;
+        }
+      }
+      return null;
+    }
+
+    // State Management (Aplikasi, Kategori, Pengaturan Spreadsheet, dan Level Akses Admin)
+    let apps = [];
+    let categories = [...DEFAULT_CATEGORIES];
+    let tempSettingsCategories = [];
+    let portalSettings = {
+      portalTitle: 'Portal KPPN Luwuk',
+      portalSubtitle: 'Kumpulan Inovasi Layanan Perbendaharaan KPPN Luwuk',
+      defaultWallpaper: 'wp-djpb-aurora',
+      defaultDirectOpen: 'false',
+      adminPin: 'kppn088',
+      categoriesJson: JSON.stringify(DEFAULT_CATEGORIES),
+      customLogoUrl: ''
+    };
+    let spreadsheetUrl = '';
+    let selectedCategory = 'ALL';
+    let searchQuery = '';
+    let isAdmin = false; // Akan dipulihkan dari localStorage bila sebelumnya sudah login
+    let activeAdminPin = '';
+    let isEditMode = false;
+    let directOpenMode = false; // false = opens iOS Detail Sheet first; true = opens URL directly in new tab
+    let soundEnabled = true;
+    let currentDetailAppId = null;
+
+    // Web Audio API subtle iOS tap sound synthesizer
+    function playTapSound() {
+      if (!soundEnabled) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(520, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.035);
+        gain.gain.setValueAtTime(0.06, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.04);
+      } catch (e) {
+        // Ignore audio context restrictions
+      }
+    }
+
+    // Load apps & settings from Google Spreadsheet Backend (GAS) or LocalStorage fallback
+    function initApp() {
+      updateClock();
+      setInterval(updateClock, 10000);
+
+      // Sembunyikan seluruh elemen panduan/setup GAS jika sudah di-deploy di Google Apps Script
+      if (isGasDeployed) {
+        document.querySelectorAll('.preview-only').forEach(el => {
+          el.style.display = 'none';
+          el.classList.add('hidden');
+        });
+      }
+
+      // 1. Muat Pengaturan Portal (Judul, Wallpaper Default, PIN, & Kategori) dari cache lokal dulu
+      const savedSettings = localStorage.getItem('kppn_luwuk_settings_v1');
+      if (savedSettings) {
+        try {
+          portalSettings = { ...portalSettings, ...JSON.parse(savedSettings) };
+        } catch (e) {}
+      }
+      loadCategoriesFromSettings();
+      applyPortalSettingsToUI(true);
+
+      // 2. Pulihkan sesi Login Admin jika sebelumnya sudah login (agar tidak ter-logout saat refresh)
+      const savedAdminSession = localStorage.getItem('kppn_luwuk_admin_session_v1');
+      if (savedAdminSession) {
+        try {
+          const parsedSession = JSON.parse(savedAdminSession);
+          if (parsedSession && parsedSession.isAdmin) {
+            isAdmin = true;
+            activeAdminPin = parsedSession.pin || portalSettings.adminPin || 'kppn088';
+          }
+        } catch (e) {}
+      }
+
+      // 3. Muat preferensi personal pengunjung (Tema & Mode Klik) jika pengunjung pernah mengubahnya
+      const savedWp = localStorage.getItem('kppn_luwuk_wp');
+      if (savedWp) setWallpaper(savedWp, true);
+
+      const savedDirect = localStorage.getItem('kppn_luwuk_direct');
+      if (savedDirect !== null) {
+        directOpenMode = savedDirect === 'true';
+        updateDirectOpenUI();
+      }
+
+      // 4. Muat daftar aplikasi dari cache lokal untuk render instan
+      const localData = localStorage.getItem('kppn_luwuk_apps_v1');
+      if (localData) {
+        try {
+          apps = JSON.parse(localData);
+        } catch (e) {
+          apps = [...DEFAULT_APPS];
+        }
+      } else {
+        apps = [...DEFAULT_APPS];
+      }
+
+      // Perbarui UI sesuai status Admin yang tersimpan
+      updateAdminUI();
+      renderCategoryFilters();
+      renderAppsGrid();
+      renderIconQuickPicker();
+
+      // 5. Jika tersambung ke Google Apps Script (baik Native maupun via Vercel API), sinkronkan dari Google Spreadsheet
+      if (isGasDeployed) {
+        document.getElementById('dbSyncText').textContent = 'Menyinkronkan Sheet...';
+        callSheetBackend('bootstrap')
+          .then(function(res) {
+            if (res) {
+              if (Array.isArray(res.apps) && res.apps.length > 0) {
+                apps = res.apps;
+                localStorage.setItem('kppn_luwuk_apps_v1', JSON.stringify(apps));
+              } else {
+                apps = [...DEFAULT_APPS];
+              }
+              if (res.settings) {
+                portalSettings = { ...portalSettings, ...res.settings };
+                localStorage.setItem('kppn_luwuk_settings_v1', JSON.stringify(portalSettings));
+                loadCategoriesFromSettings();
+                applyPortalSettingsToUI(false);
+              }
+              if (res.spreadsheetUrl) {
+                spreadsheetUrl = res.spreadsheetUrl;
+                const linkEl = document.getElementById('openSpreadsheetLink');
+                if (linkEl) {
+                  linkEl.href = spreadsheetUrl;
+                  linkEl.classList.remove('hidden');
+                }
+              }
+              document.getElementById('dbSyncText').textContent = 'Tersinkron Google Sheet';
+              renderCategoryFilters();
+              renderAppsGrid();
+            }
+          })
+          .catch(function() {
+            document.getElementById('dbSyncText').textContent = 'Mode Pratinjau Lokal';
+          });
+      }
+
+      // Keyboard shortcut Cmd/Ctrl + K for Spotlight Search
+      window.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          const input = document.getElementById('searchInput');
+          if (input) input.focus();
+        } else if (e.key === 'Escape') {
+          closeAppDetailModal();
+          closeAppEditor();
+          closeAppLibraryModal();
+          closeGasModal();
+          closeAboutModal();
+          closeAdminLoginModal();
+          closeSheetSettingsModal();
+        }
+      });
+    }
+
+    // Parse daftar kategori dari portalSettings.categoriesJson
+    function loadCategoriesFromSettings() {
+      if (portalSettings.categoriesJson) {
+        try {
+          const parsed = JSON.parse(portalSettings.categoriesJson);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            categories = parsed;
+            return;
+          }
+        } catch (e) {}
+      }
+      categories = [...DEFAULT_CATEGORIES];
+    }
+
+    // Terapkan pengaturan dari Sheet "Pengaturan" ke tampilan
+    function applyPortalSettingsToUI(initialLoad) {
+      const titleEl = document.getElementById('portalTitleText');
+      const subEl = document.getElementById('portalSubtitleText');
+      if (titleEl && portalSettings.portalTitle) titleEl.textContent = portalSettings.portalTitle;
+      if (subEl && portalSettings.portalSubtitle) subEl.textContent = portalSettings.portalSubtitle;
+
+      renderPortalLogo();
+
+      // Jika pengunjung belum punya preferensi wallpaper sendiri, gunakan default dari Sheet Pengaturan
+      if (!localStorage.getItem('kppn_luwuk_wp') && portalSettings.defaultWallpaper) {
+        setWallpaper(portalSettings.defaultWallpaper, true);
+      }
+      if (localStorage.getItem('kppn_luwuk_direct') === null && portalSettings.defaultDirectOpen !== undefined) {
+        directOpenMode = String(portalSettings.defaultDirectOpen) === 'true';
+        updateDirectOpenUI();
+      }
+    }
+
+    // Render Custom Logo atau Default DJPb Logo pada Widget Header & Modal About
+    function renderPortalLogo() {
+      const customImg = document.getElementById('customPortalLogoImg');
+      const defaultSvg = document.getElementById('defaultPortalLogoSvg');
+      const aboutCustomImg = document.getElementById('aboutCustomLogoImg');
+      const aboutDefaultIcon = document.getElementById('aboutDefaultLogoIcon');
+      const resetLogoBtn = document.getElementById('ccResetLogoBtn');
+      const logoContainer = document.getElementById('portalLogoContainer');
+
+      const hasCustom = Boolean(portalSettings.customLogoUrl && portalSettings.customLogoUrl.trim().length > 0);
+
+      if (hasCustom) {
+        if (customImg) {
+          customImg.src = portalSettings.customLogoUrl;
+          customImg.classList.remove('hidden');
+        }
+        if (defaultSvg) defaultSvg.classList.add('hidden');
+        if (logoContainer) logoContainer.classList.replace('p-2', 'p-1');
+        if (aboutCustomImg) {
+          aboutCustomImg.src = portalSettings.customLogoUrl;
+          aboutCustomImg.classList.remove('hidden');
+        }
+        if (aboutDefaultIcon) aboutDefaultIcon.classList.add('hidden');
+        if (resetLogoBtn) resetLogoBtn.classList.remove('hidden');
+      } else {
+        if (customImg) {
+          customImg.src = '';
+          customImg.classList.add('hidden');
+        }
+        if (defaultSvg) defaultSvg.classList.remove('hidden');
+        if (logoContainer) logoContainer.classList.replace('p-1', 'p-2');
+        if (aboutCustomImg) {
+          aboutCustomImg.src = '';
+          aboutCustomImg.classList.add('hidden');
+        }
+        if (aboutDefaultIcon) aboutDefaultIcon.classList.remove('hidden');
+        if (resetLogoBtn) resetLogoBtn.classList.add('hidden');
+      }
+    }
+
+    // Handle Upload File Gambar Logo dari Pusat Kontrol iPadOS (Khusus Admin)
+    function handleLogoFileUpload(event) {
+      if (!isAdmin) {
+        openAdminLoginModal();
+        return;
+      }
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        showToast('Format file harus berupa gambar (PNG/JPG/SVG/WebP)');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(loadEvent) {
+        const img = new Image();
+        img.onload = function() {
+          // Resize & kompres otomatis maks 240x240px agar hemat sel di Google Spreadsheet
+          const canvas = document.createElement('canvas');
+          const maxDim = 240;
+          let w = img.width;
+          let h = img.height;
+          if (w > h) {
+            if (w > maxDim) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            }
+          } else {
+            if (h > maxDim) {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, w, h);
+
+          const optimizedDataUrl = canvas.toDataURL('image/png', 0.9);
+          saveCustomLogoSetting(optimizedDataUrl, 'Logo Portal berhasil diperbarui!');
+        };
+        img.src = loadEvent.target.result;
+      };
+      reader.readAsDataURL(file);
+      event.target.value = '';
+    }
+
+    // Kembalikan Logo ke Default DJPb
+    function resetCustomLogo() {
+      if (!isAdmin) return;
+      playTapSound();
+      saveCustomLogoSetting('', 'Logo dikembalikan ke Default DJPb');
+    }
+
+    function saveCustomLogoSetting(logoDataUrl, toastMsg) {
+      portalSettings.customLogoUrl = logoDataUrl;
+      localStorage.setItem('kppn_luwuk_settings_v1', JSON.stringify(portalSettings));
+      renderPortalLogo();
+
+      if (isGasDeployed && isAdmin) {
+        callSheetBackend('saveSettings', { settings: portalSettings, adminPin: activeAdminPin })
+          .then(function() {
+            showToast(toastMsg);
+          })
+          .catch(function(err) {
+            showToast('Tersimpan lokal (Gagal sinkron Sheet: ' + err.message + ')');
+          });
+      } else {
+        showToast(toastMsg);
+      }
+    }
+
+    // ========================================================================
+    // SISTEM AUTENTIKASI & ROLE LEVEL ADMIN vs PENGUNJUNG UMUM
+    // ========================================================================
+    function handleAdminButton() {
+      playTapSound();
+      if (isAdmin) {
+        // Jika sudah login admin, klik tombol di atas membuka Pengaturan Sheet atau opsi keluar
+        openSheetSettingsModal();
+      } else {
+        openAdminLoginModal();
+      }
+    }
+
+    function openAdminLoginModal() {
+      playTapSound();
+      document.getElementById('adminPinInput').value = '';
+      document.getElementById('adminPinError').classList.add('hidden');
+      const modal = document.getElementById('adminLoginModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => document.getElementById('adminPinInput').focus(), 100);
+    }
+
+    function closeAdminLoginModal() {
+      const modal = document.getElementById('adminLoginModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function submitAdminLogin(e) {
+      e.preventDefault();
+      const inputPin = document.getElementById('adminPinInput').value.trim();
+      const errEl = document.getElementById('adminPinError');
+
+      // Jika tersambung ke Google Apps Script (Native atau Vercel REST API), verifikasi ke Sheet "Pengaturan"
+      if (isGasDeployed) {
+        callSheetBackend('verifyPin', { pin: inputPin })
+          .then(function(res) {
+            if (res && res.valid) {
+              activateAdminSession(inputPin);
+            } else {
+              errEl.classList.remove('hidden');
+            }
+          })
+          .catch(function() {
+            // Fallback jika offline/preview
+            if (inputPin === (portalSettings.adminPin || 'kppn088')) {
+              activateAdminSession(inputPin);
+            } else {
+              errEl.classList.remove('hidden');
+            }
+          });
+      } else {
+        // Verifikasi pada lingkungan pratinjau lokal
+        if (inputPin === (portalSettings.adminPin || 'kppn088')) {
+          activateAdminSession(inputPin);
+        } else {
+          errEl.classList.remove('hidden');
+        }
+      }
+    }
+
+    function activateAdminSession(pin) {
+      isAdmin = true;
+      activeAdminPin = pin;
+      localStorage.setItem('kppn_luwuk_admin_session_v1', JSON.stringify({
+        isAdmin: true,
+        pin: pin,
+        timestamp: Date.now()
+      }));
+      closeAdminLoginModal();
+      updateAdminUI();
+      renderAppsGrid();
+      showToast('Mode Admin Aktif — Sesi Login Tersimpan');
+    }
+
+    function logoutAdmin() {
+      playTapSound();
+      isAdmin = false;
+      activeAdminPin = '';
+      localStorage.removeItem('kppn_luwuk_admin_session_v1');
+      if (isEditMode) {
+        isEditMode = false;
+        document.getElementById('appsGrid').classList.remove('jiggle-active');
+        document.getElementById('jiggleBanner').classList.add('hidden');
+      }
+      updateAdminUI();
+      renderAppsGrid();
+      closeSheetSettingsModal();
+      closeAppEditor();
+      closeGasModal();
+      showToast('Keluar dari Mode Admin — Kembali ke Mode Publik');
+    }
+
+    // Tampilkan / Sembunyikan seluruh elemen berlabel .admin-only
+    function updateAdminUI() {
+      const adminElements = document.querySelectorAll('.admin-only');
+      adminElements.forEach(el => {
+        // Jika elemen adalah .preview-only dan sedang berjalan di deployment GAS, tetap sembunyikan
+        if (isGasDeployed && el.classList.contains('preview-only')) {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+          el.style.display = 'none';
+          return;
+        }
+        if (isAdmin) {
+          el.classList.remove('hidden');
+          if (!el.classList.contains('flex') && !el.classList.contains('inline-flex') && !el.classList.contains('block')) {
+            el.classList.add('flex');
+          }
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        }
+      });
+
+      const topAdminIcon = document.getElementById('topAdminIcon');
+      const topAdminText = document.getElementById('topAdminText');
+      const topAdminBtn = document.getElementById('topAdminBtn');
+      const ccPublicBox = document.getElementById('ccPublicBox');
+      const detailActionGrid = document.getElementById('detailActionGrid');
+
+      if (isAdmin) {
+        if (topAdminIcon) topAdminIcon.className = 'fa-solid fa-unlock-keyhole text-[10px] text-amber-300';
+        if (topAdminText) {
+          topAdminText.textContent = 'Admin Aktif';
+          topAdminText.className = 'hidden sm:inline text-amber-200 font-bold';
+        }
+        if (topAdminBtn) {
+          topAdminBtn.className = 'px-2.5 py-0.5 rounded-full bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/40 text-[11px] font-medium transition flex items-center gap-1.5';
+        }
+        if (ccPublicBox) ccPublicBox.classList.add('hidden');
+        if (detailActionGrid) detailActionGrid.className = 'grid grid-cols-2 gap-2';
+      } else {
+        if (topAdminIcon) topAdminIcon.className = 'fa-solid fa-lock text-[10px] text-white/75';
+        if (topAdminText) {
+          topAdminText.textContent = 'Mode Publik';
+          topAdminText.className = 'hidden sm:inline text-white/85';
+        }
+        if (topAdminBtn) {
+          topAdminBtn.className = 'px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[11px] font-medium transition flex items-center gap-1.5';
+        }
+        if (ccPublicBox) ccPublicBox.classList.remove('hidden');
+        if (detailActionGrid) detailActionGrid.className = 'grid grid-cols-1 gap-2';
+      }
+    }
+
+    // Modal Pengaturan Spreadsheet (Sheet "Pengaturan" & Kategori)
+    function openSheetSettingsModal() {
+      if (!isAdmin) {
+        openAdminLoginModal();
+        return;
+      }
+      playTapSound();
+      document.getElementById('setPortalTitle').value = portalSettings.portalTitle || 'Portal KPPN Luwuk';
+      document.getElementById('setPortalSubtitle').value = portalSettings.portalSubtitle || 'Kumpulan Inovasi Layanan Perbendaharaan KPPN Luwuk';
+      document.getElementById('setDefaultWallpaper').value = portalSettings.defaultWallpaper || 'wp-djpb-aurora';
+      document.getElementById('setDefaultDirectOpen').value = String(portalSettings.defaultDirectOpen || 'false');
+      document.getElementById('setAdminPin').value = activeAdminPin || portalSettings.adminPin || 'kppn088';
+
+      // Salin daftar kategori ke buffer editor
+      tempSettingsCategories = categories.map(c => ({ ...c }));
+      renderCategoriesEditorList();
+
+      const modal = document.getElementById('sheetSettingsModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function renderCategoriesEditorList() {
+      const container = document.getElementById('categoriesEditorList');
+      if (!container) return;
+      container.innerHTML = tempSettingsCategories.map((cat, idx) => `
+        <div class="grid grid-cols-12 gap-2 items-center bg-black/30 p-2 rounded-xl border border-white/10">
+          <div class="col-span-5">
+            <input
+              type="text"
+              value="${escapeHtml(cat.id)}"
+              oninput="updateTempCategory(${idx}, 'id', this.value)"
+              placeholder="Nama Kategori"
+              required
+              class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-white/15 text-white text-xs outline-none focus:border-amber-400"
+            />
+          </div>
+          <div class="col-span-4">
+            <input
+              type="text"
+              value="${escapeHtml(cat.label)}"
+              oninput="updateTempCategory(${idx}, 'label', this.value)"
+              placeholder="Label Tombol"
+              required
+              class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-white/15 text-white text-xs outline-none focus:border-amber-400"
+            />
+          </div>
+          <div class="col-span-2">
+            <input
+              type="text"
+              value="${escapeHtml(cat.icon)}"
+              oninput="updateTempCategory(${idx}, 'icon', this.value)"
+              placeholder="fa-folder"
+              required
+              class="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-white/15 text-amber-300 font-mono text-[11px] outline-none focus:border-amber-400"
+            />
+          </div>
+          <div class="col-span-1 flex justify-end">
+            <button
+              type="button"
+              onclick="removeCategoryRow(${idx})"
+              class="w-7 h-7 rounded-lg bg-rose-500/20 hover:bg-rose-500/35 text-rose-300 flex items-center justify-center text-xs"
+              title="Hapus Kategori"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateTempCategory(index, field, val) {
+      if (!tempSettingsCategories[index]) return;
+      tempSettingsCategories[index][field] = val;
+    }
+
+    function addCategoryRow() {
+      tempSettingsCategories.push({
+        id: 'Kategori Baru',
+        label: 'Kategori Baru',
+        icon: 'fa-folder'
+      });
+      renderCategoriesEditorList();
+    }
+
+    function removeCategoryRow(index) {
+      if (tempSettingsCategories.length <= 1) {
+        showToast('Minimal harus ada 1 kategori layanan');
+        return;
+      }
+      tempSettingsCategories.splice(index, 1);
+      renderCategoriesEditorList();
+    }
+
+    function closeSheetSettingsModal() {
+      const modal = document.getElementById('sheetSettingsModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveGlobalSettingsForm(e) {
+      e.preventDefault();
+      if (!isAdmin) return;
+
+      // Bersihkan & validasi daftar kategori
+      const cleanedCategories = tempSettingsCategories
+        .map(c => ({
+          id: (c.id || '').trim(),
+          label: (c.label || c.id || '').trim(),
+          icon: (c.icon || 'fa-folder').trim()
+        }))
+        .filter(c => c.id.length > 0);
+
+      if (cleanedCategories.length > 0) {
+        categories = cleanedCategories;
+      }
+
+      const updatedSettings = {
+        portalTitle: document.getElementById('setPortalTitle').value.trim(),
+        portalSubtitle: document.getElementById('setPortalSubtitle').value.trim(),
+        defaultWallpaper: document.getElementById('setDefaultWallpaper').value,
+        defaultDirectOpen: document.getElementById('setDefaultDirectOpen').value,
+        adminPin: document.getElementById('setAdminPin').value.trim() || 'kppn088',
+        categoriesJson: JSON.stringify(categories),
+        customLogoUrl: portalSettings.customLogoUrl || ''
+      };
+
+      const oldPin = activeAdminPin;
+      portalSettings = { ...portalSettings, ...updatedSettings };
+      activeAdminPin = updatedSettings.adminPin;
+      localStorage.setItem('kppn_luwuk_settings_v1', JSON.stringify(portalSettings));
+      localStorage.setItem('kppn_luwuk_admin_session_v1', JSON.stringify({
+        isAdmin: true,
+        pin: activeAdminPin,
+        timestamp: Date.now()
+      }));
+
+      // Reset filter jika kategori yang sedang aktif dihapus
+      if (selectedCategory !== 'ALL' && !categories.some(c => c.id === selectedCategory)) {
+        selectedCategory = 'ALL';
+      }
+
+      // Terapkan langsung perubahan judul, subjudul, tema, dan kategori
+      document.getElementById('portalTitleText').textContent = portalSettings.portalTitle;
+      document.getElementById('portalSubtitleText').textContent = portalSettings.portalSubtitle;
+      setWallpaper(portalSettings.defaultWallpaper, true);
+      renderCategoryFilters();
+      renderAppsGrid();
+
+      if (isGasDeployed) {
+        callSheetBackend('saveSettings', { settings: updatedSettings, adminPin: oldPin })
+          .then(function() {
+            showToast('Pengaturan & Kategori disimpan ke Google Sheet!');
+          })
+          .catch(function(err) {
+            showToast('Gagal menyimpan Sheet Pengaturan: ' + err.message);
+          });
+      } else {
+        showToast('Pengaturan & Kategori berhasil disimpan!');
+      }
+
+      closeSheetSettingsModal();
+    }
+
+    // Save apps to LocalStorage and Google Spreadsheet (Sheet "Data_Aplikasi")
+    function persistApps() {
+      localStorage.setItem('kppn_luwuk_apps_v1', JSON.stringify(apps));
+      if (isGasDeployed && isAdmin) {
+        callSheetBackend('saveApps', { apps: apps, adminPin: activeAdminPin })
+          .then(function() {
+            document.getElementById('dbSyncText').textContent = 'Tersimpan di Google Sheet';
+          })
+          .catch(function(err) {
+            showToast('Gagal menyimpan ke Sheet: ' + err.message);
+          });
+      }
+    }
+
+    // Update WITA Clock (GMT+8 for Luwuk, Central Sulawesi)
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('id-ID', {
+        timeZone: 'Asia/Makassar',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      const dateStr = now.toLocaleDateString('id-ID', {
+        timeZone: 'Asia/Makassar',
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short'
+      });
+
+      const timeEl = document.getElementById('statusBarTime');
+      const dateEl = document.getElementById('statusBarDate');
+      if (timeEl) timeEl.textContent = `${timeStr} WITA`;
+      if (dateEl) dateEl.textContent = dateStr;
+    }
+
+    // Render Category Pills inside Widget & Page Dots
+    function renderCategoryFilters() {
+      const container = document.getElementById('categoryFilterBar');
+      const allCategories = [
+        { id: 'ALL', label: 'Semua', icon: 'fa-border-all' },
+        ...categories
+      ];
+
+      container.innerHTML = allCategories.map(cat => {
+        const isActive = selectedCategory === cat.id;
+        const count = cat.id === 'ALL'
+          ? apps.length
+          : apps.filter(a => a.category === cat.id).length;
+
+        const safeId = cat.id.replace(/'/g, "\\'");
+        return `
+          <button
+            onclick="filterCategory('${safeId}')"
+            class="px-2.5 py-1.5 rounded-xl text-[11px] font-semibold flex items-center gap-1.5 transition ${
+              isActive
+                ? 'bg-amber-400 text-slate-950 shadow-md scale-[1.02]'
+                : 'bg-white/10 hover:bg-white/20 text-white/85 border border-white/15'
+            }"
+          >
+            <i class="fa-solid ${escapeHtml(cat.icon)} text-[10px]"></i>
+            <span>${escapeHtml(cat.label)}</span>
+            <span class="px-1.5 py-0.2 rounded-full text-[9px] ${
+              isActive ? 'bg-slate-950/20 text-slate-950 font-bold' : 'bg-white/15 text-white/80'
+            }">${count}</span>
+          </button>
+        `;
+      }).join('');
+
+      // Render iOS Page Indicator Dots secara dinamis mengikuti Kategori
+      const dotsContainer = document.getElementById('pageDotsContainer');
+      if (dotsContainer) {
+        dotsContainer.innerHTML = allCategories.map(cat => {
+          const isActive = selectedCategory === cat.id;
+          const safeId = cat.id.replace(/'/g, "\\'");
+          return `
+            <button
+              onclick="filterCategory('${safeId}')"
+              class="${isActive ? 'w-2.5 h-2.5 bg-white' : 'w-2 h-2 bg-white/40 hover:bg-white/70'} rounded-full transition-all"
+              title="${escapeHtml(cat.label)}"
+            ></button>
+          `;
+        }).join('');
+      }
+    }
+
+    // Render iPadOS Squircle App Icons Grid
+    function renderAppsGrid() {
+      const grid = document.getElementById('appsGrid');
+      const emptyState = document.getElementById('emptyState');
+
+      const filtered = apps.filter(app => {
+        const matchesCat = selectedCategory === 'ALL' || app.category === selectedCategory;
+        const q = searchQuery.trim().toLowerCase();
+        const matchesQuery = !q ||
+          app.name.toLowerCase().includes(q) ||
+          app.category.toLowerCase().includes(q) ||
+          (app.desc && app.desc.toLowerCase().includes(q));
+        return matchesCat && matchesQuery;
+      });
+
+      document.getElementById('activeCountLabel').textContent =
+        `Menampilkan ${filtered.length} dari ${apps.length} aplikasi inovasi`;
+      document.getElementById('aboutAppCount').textContent = `${apps.length} Aplikasi`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered.map((app) => {
+        const badgeHtml = app.badge
+          ? `<span class="absolute -top-1.5 -right-1.5 z-20 px-1.5 py-0.5 rounded-full bg-red-500 border-2 border-slate-900 text-[8.5px] font-extrabold text-white shadow-md tracking-tight">${escapeHtml(app.badge)}</span>`
+          : '';
+
+        const editBadgeHtml = isEditMode
+          ? `<span class="absolute -top-2 -left-2 z-20 w-5 h-5 rounded-full bg-amber-400 text-slate-950 border-2 border-slate-900 flex items-center justify-center shadow-md">
+               <i class="fa-solid fa-pen text-[9px]"></i>
+             </span>`
+          : '';
+
+        return `
+          <div class="app-item flex flex-col items-center group w-24 sm:w-28">
+            <button
+              onclick="handleAppClick('${app.id}')"
+              class="relative focus:outline-none flex flex-col items-center"
+              title="${escapeHtml(app.name)}"
+            >
+              ${editBadgeHtml}
+              ${badgeHtml}
+              <div class="w-14 h-14 sm:w-16 sm:h-16 ios-squircle bg-gradient-to-br ${app.gradient} flex items-center justify-center text-white text-xl sm:text-2xl">
+                <i class="fa-solid ${app.icon} drop-shadow"></i>
+              </div>
+              <span class="mt-1.5 text-[11px] sm:text-xs font-semibold text-white text-center leading-tight line-clamp-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 group-hover:text-amber-300 transition-colors">
+                ${escapeHtml(app.name)}
+              </span>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Handle clicking an App Icon on the Home Screen
+    function handleAppClick(appId) {
+      playTapSound();
+      const app = apps.find(a => a.id === appId);
+      if (!app) return;
+
+      // If in Jiggle/Edit Mode, open the Editor Modal directly
+      if (isEditMode) {
+        openAppEditor(appId);
+        return;
+      }
+
+      // If Direct Open Mode is active, launch URL immediately in new tab
+      if (directOpenMode && app.url) {
+        window.open(app.url, '_blank', 'noopener,noreferrer');
+        return;
+      }
+
+      // Otherwise open sleek iOS App Launch Card
+      currentDetailAppId = app.id;
+      const iconBox = document.getElementById('detailIconBox');
+      iconBox.className = `w-16 h-16 ios-squircle bg-gradient-to-br ${app.gradient} flex items-center justify-center text-white text-2xl shrink-0`;
+      document.getElementById('detailIcon').className = `fa-solid ${app.icon}`;
+      document.getElementById('detailCategory').textContent = app.category;
+      document.getElementById('detailTitle').textContent = app.name;
+      document.getElementById('detailDesc').textContent = app.desc || 'Inovasi layanan perbendaharaan KPPN Luwuk.';
+      document.getElementById('detailUrlText').textContent = app.url;
+      document.getElementById('detailOpenBtn').href = app.url;
+
+      const modal = document.getElementById('appDetailModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeAppDetailModal() {
+      const modal = document.getElementById('appDetailModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function copyCurrentAppLink() {
+      const app = apps.find(a => a.id === currentDetailAppId);
+      if (!app) return;
+      copyTextToClipboard(app.url, 'Tautan aplikasi berhasil disalin!');
+    }
+
+    function editCurrentDetailApp() {
+      if (!isAdmin) {
+        closeAppDetailModal();
+        openAdminLoginModal();
+        return;
+      }
+      const id = currentDetailAppId;
+      closeAppDetailModal();
+      openAppEditor(id);
+    }
+
+    // Filter by Category
+    function filterCategory(category) {
+      playTapSound();
+      selectedCategory = category;
+      renderCategoryFilters();
+      renderAppsGrid();
+    }
+
+    // Search Input Handler
+    function handleSearch(val) {
+      searchQuery = val;
+      const clearBtn = document.getElementById('clearSearchBtn');
+      const hint = document.getElementById('shortcutHint');
+      if (val.trim().length > 0) {
+        clearBtn.classList.remove('hidden');
+        if (hint) hint.classList.add('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+        if (hint) hint.classList.remove('hidden');
+      }
+      renderAppsGrid();
+    }
+
+    function clearSearch() {
+      searchQuery = '';
+      selectedCategory = 'ALL';
+      const input = document.getElementById('searchInput');
+      if (input) input.value = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      const hint = document.getElementById('shortcutHint');
+      if (hint) hint.classList.remove('hidden');
+      renderCategoryFilters();
+      renderAppsGrid();
+    }
+
+    // Toggle iOS Jiggle / Edit Mode (Hanya bisa diakses oleh Admin)
+    function toggleEditMode() {
+      if (!isAdmin) {
+        openAdminLoginModal();
+        return;
+      }
+      playTapSound();
+      isEditMode = !isEditMode;
+      const grid = document.getElementById('appsGrid');
+      const banner = document.getElementById('jiggleBanner');
+      const topBtnText = document.getElementById('topEditBtnText');
+
+      if (isEditMode) {
+        grid.classList.add('jiggle-active');
+        banner.classList.remove('hidden');
+        if (topBtnText) topBtnText.textContent = 'Selesai Edit';
+      } else {
+        grid.classList.remove('jiggle-active');
+        banner.classList.add('hidden');
+        if (topBtnText) topBtnText.textContent = 'Edit Layar';
+      }
+      renderAppsGrid();
+    }
+
+    // Open Add/Edit App Modal (Hanya bisa diakses oleh Admin)
+    function openAppEditor(appId) {
+      if (!isAdmin) {
+        openAdminLoginModal();
+        return;
+      }
+      playTapSound();
+      const modal = document.getElementById('appEditorModal');
+      const deleteBtn = document.getElementById('deleteAppBtn');
+
+      // Populate Category Select Options dynamically from categories state
+      const catSelect = document.getElementById('editAppCategory');
+      catSelect.innerHTML = categories.map(c =>
+        `<option value="${escapeHtml(c.id)}">${escapeHtml(c.label)} (${escapeHtml(c.id)})</option>`
+      ).join('');
+
+      if (appId) {
+        const app = apps.find(a => a.id === appId);
+        if (!app) return;
+        // Jika kategori aplikasi belum ada di daftar, tambahkan sementara ke opsi dropdown
+        if (app.category && !categories.some(c => c.id === app.category)) {
+          catSelect.innerHTML += `<option value="${escapeHtml(app.category)}">${escapeHtml(app.category)}</option>`;
+        }
+        document.getElementById('editorModalTitle').textContent = 'Edit Aplikasi Inovasi';
+        document.getElementById('editAppId').value = app.id;
+        document.getElementById('editAppName').value = app.name;
+        document.getElementById('editAppUrl').value = app.url;
+        document.getElementById('editAppCategory').value = app.category;
+        document.getElementById('editAppBadge').value = app.badge || '';
+        document.getElementById('editAppIcon').value = app.icon || 'fa-rocket';
+        document.getElementById('editAppGradient').value = app.gradient;
+        document.getElementById('editAppDesc').value = app.desc || '';
+        deleteBtn.classList.remove('hidden');
+      } else {
+        document.getElementById('editorModalTitle').textContent = 'Tambah Inovasi KPPN Luwuk';
+        document.getElementById('editAppId').value = '';
+        document.getElementById('editAppName').value = '';
+        document.getElementById('editAppUrl').value = 'https://';
+        document.getElementById('editAppCategory').value = categories[0] ? categories[0].id : 'Layanan Satker';
+        document.getElementById('editAppBadge').value = 'NEW';
+        document.getElementById('editAppIcon').value = 'fa-rocket';
+        document.getElementById('editAppGradient').value = 'from-sky-400 via-blue-600 to-indigo-700';
+        document.getElementById('editAppDesc').value = '';
+        deleteBtn.classList.add('hidden');
+      }
+
+      updateEditorIconPreview();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    // Render pemilih ikon visual FontAwesome di dalam Modal Edit Aplikasi
+    function renderIconQuickPicker() {
+      const picker = document.getElementById('iconQuickPicker');
+      if (!picker) return;
+      picker.innerHTML = AVAILABLE_FA_ICONS.map(iconClass => `
+        <button
+          type="button"
+          onclick="selectQuickFaIcon('${iconClass}')"
+          class="icon-pick-btn h-8 rounded-lg bg-white/10 hover:bg-sky-500/30 border border-white/10 flex items-center justify-center text-white text-xs transition"
+          data-icon="${iconClass}"
+          title="${iconClass}"
+        >
+          <i class="fa-solid ${iconClass}"></i>
+        </button>
+      `).join('');
+    }
+
+    function selectQuickFaIcon(iconClass) {
+      playTapSound();
+      const input = document.getElementById('editAppIcon');
+      if (input) {
+        input.value = iconClass;
+        updateEditorIconPreview();
+      }
+    }
+
+    function updateEditorIconPreview() {
+      const iconInput = document.getElementById('editAppIcon');
+      const gradSelect = document.getElementById('editAppGradient');
+      const previewIcon = document.getElementById('editIconPreview');
+      const previewBox = document.getElementById('editIconPreviewBox');
+      if (!iconInput || !previewIcon || !previewBox) return;
+
+      const rawIcon = iconInput.value.trim() || 'fa-cube';
+      const normalizedIcon = rawIcon.startsWith('fa-') ? rawIcon : 'fa-' + rawIcon;
+      previewIcon.className = `fa-solid ${normalizedIcon}`;
+      if (gradSelect && gradSelect.value) {
+        previewBox.className = `w-10 h-10 rounded-xl bg-gradient-to-br ${gradSelect.value} flex items-center justify-center text-white text-base shrink-0 shadow border border-white/20`;
+      }
+
+      // Highlight tombol ikon yang cocok pada quick picker
+      document.querySelectorAll('.icon-pick-btn').forEach(btn => {
+        if (btn.getAttribute('data-icon') === normalizedIcon) {
+          btn.className = 'icon-pick-btn h-8 rounded-lg bg-amber-400 text-slate-950 border border-amber-300 flex items-center justify-center text-xs font-bold shadow';
+        } else {
+          btn.className = 'icon-pick-btn h-8 rounded-lg bg-white/10 hover:bg-sky-500/30 border border-white/10 flex items-center justify-center text-white text-xs transition';
+        }
+      });
+    }
+
+    function closeAppEditor() {
+      const modal = document.getElementById('appEditorModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveAppFromEditor(e) {
+      e.preventDefault();
+      const id = document.getElementById('editAppId').value;
+      const newApp = {
+        id: id || 'app-' + Date.now(),
+        name: document.getElementById('editAppName').value.trim(),
+        shortName: document.getElementById('editAppName').value.trim(),
+        url: document.getElementById('editAppUrl').value.trim(),
+        category: document.getElementById('editAppCategory').value,
+        badge: document.getElementById('editAppBadge').value.trim(),
+        icon: document.getElementById('editAppIcon').value,
+        gradient: document.getElementById('editAppGradient').value,
+        desc: document.getElementById('editAppDesc').value.trim()
+      };
+
+      if (id) {
+        const idx = apps.findIndex(a => a.id === id);
+        if (idx > -1) apps[idx] = newApp;
+      } else {
+        apps.push(newApp);
+      }
+
+      persistApps();
+      renderCategoryFilters();
+      renderAppsGrid();
+      closeAppEditor();
+      showToast('Data aplikasi berhasil disimpan!');
+    }
+
+    function deleteCurrentApp() {
+      const id = document.getElementById('editAppId').value;
+      if (!id) return;
+      apps = apps.filter(a => a.id !== id);
+      persistApps();
+      renderCategoryFilters();
+      renderAppsGrid();
+      closeAppEditor();
+      showToast('Aplikasi dihapus dari layar utama');
+    }
+
+    function resetDefaultApps() {
+      apps = [...DEFAULT_APPS];
+      persistApps();
+      renderCategoryFilters();
+      renderAppsGrid();
+      showToast('12 aplikasi default KPPN Luwuk dipulihkan');
+    }
+
+    // Direct Open vs App Card Toggle
+    function toggleDirectOpen() {
+      playTapSound();
+      directOpenMode = !directOpenMode;
+      localStorage.setItem('kppn_luwuk_direct', String(directOpenMode));
+      updateDirectOpenUI();
+      showToast(directOpenMode ? 'Mode Buka Langsung Aktif' : 'Mode Kartu Info Detail Aktif');
+    }
+
+    function updateDirectOpenUI() {
+      const textEl = document.getElementById('directLaunchText');
+      const ccStatus = document.getElementById('ccDirectStatus');
+      if (textEl) textEl.textContent = directOpenMode ? 'Mode: Buka Langsung' : 'Mode: Kartu Info';
+      if (ccStatus) ccStatus.textContent = directOpenMode ? 'Buka Tab Baru' : 'Kartu Info';
+    }
+
+    function toggleSoundFx() {
+      soundEnabled = !soundEnabled;
+      const status = document.getElementById('ccSoundStatus');
+      const icon = document.getElementById('ccSoundIcon');
+      if (status) status.textContent = soundEnabled ? 'Aktif' : 'Senyap';
+      if (icon) {
+        icon.className = soundEnabled
+          ? 'w-9 h-9 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center shrink-0'
+          : 'w-9 h-9 rounded-full bg-white/20 text-white flex items-center justify-center shrink-0';
+      }
+      if (soundEnabled) playTapSound();
+    }
+
+    // Control Center & Wallpaper Picker
+    function toggleControlCenter() {
+      playTapSound();
+      const modal = document.getElementById('controlCenterModal');
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function setWallpaper(wpClass, silent) {
+      const body = document.getElementById('appBody');
+      body.classList.remove(
+        'wp-djpb-aurora',
+        'wp-luwuk-sunset',
+        'wp-ipados-pro',
+        'wp-emerald-sulawesi',
+        'wp-kemenkeu-royal'
+      );
+      body.classList.add(wpClass);
+      localStorage.setItem('kppn_luwuk_wp', wpClass);
+      if (!silent) showToast('Wallpaper iPadOS diperbarui');
+    }
+
+    // App Library Modal
+    function openAppLibraryModal() {
+      playTapSound();
+      const list = document.getElementById('appLibraryList');
+      list.innerHTML = apps.map(app => {
+        const adminEditBtn = isAdmin
+          ? `<button onclick="closeAppLibraryModal(); openAppEditor('${app.id}')" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-amber-300 text-xs" title="Edit Link di Spreadsheet (Admin)">
+               <i class="fa-solid fa-pen"></i>
+             </button>`
+          : '';
+        return `
+        <div class="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-between gap-3 transition">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 ios-squircle bg-gradient-to-br ${app.gradient} flex items-center justify-center text-white text-base shrink-0">
+              <i class="fa-solid ${app.icon}"></i>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs sm:text-sm font-bold text-white truncate">${escapeHtml(app.name)}</h4>
+                <span class="px-2 py-0.2 rounded-full bg-white/10 text-[10px] text-sky-300 shrink-0">${escapeHtml(app.category)}</span>
+              </div>
+              <p class="text-[11px] text-white/65 truncate">${escapeHtml(app.desc || '')}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            ${adminEditBtn}
+            <a href="${escapeHtml(app.url)}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs flex items-center gap-1">
+              <span>Buka</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        </div>
+      `;
+      }).join('');
+
+      const modal = document.getElementById('appLibraryModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeAppLibraryModal() {
+      const modal = document.getElementById('appLibraryModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Google Apps Script Code Modal (Hanya Admin)
+    function openGasModal() {
+      if (!isAdmin) {
+        openAdminLoginModal();
+        return;
+      }
+      playTapSound();
+      const modal = document.getElementById('gasModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeGasModal() {
+      const modal = document.getElementById('gasModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function copyGasCode() {
+      const code = document.getElementById('gasCodeBlock').innerText;
+      copyTextToClipboard(code, 'Kode Code.gs berhasil disalin ke Clipboard!');
+    }
+
+    // About Modal
+    function openAboutModal() {
+      playTapSound();
+      const modal = document.getElementById('aboutModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeAboutModal() {
+      const modal = document.getElementById('aboutModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Clipboard Utility (iframe-safe using execCommand)
+    function copyTextToClipboard(text, message) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(message || 'Disalin ke clipboard!');
+      } catch (err) {
+        showToast('Gagal menyalin teks');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // Toast Notification
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('iosToast');
+      document.getElementById('iosToastText').textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2600);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    window.onload = initApp;
+  </script>
+</body>
+</html>
